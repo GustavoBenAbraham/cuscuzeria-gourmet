@@ -21,10 +21,12 @@ Instagram informado: https://www.instagram.com/cuscuzgourmmet/ — acesso limita
 
 WhatsApp informado no briefing e telefone reproduzido na página 4: https://wa.me/5511990175768. O perfil @cuscuzgourmmet também aparece na página 4.
 
+O usuário confirmou nesta conversa que já possui autorização. O uso do logotipo e das fotografias das fontes fornecidas não depende de uma nova autorização. Continua pendente somente a obtenção dos arquivos em resolução adequada: as páginas disponíveis pelo conector medem aproximadamente 380 × 537 px, com fotografias individuais muito menores. Por isso, a versão atual usa imagens explicitamente ilustrativas, incluindo a abertura gerada por IA documentada em `IMAGE-PROMPT.md`.
+
 ## Pendências para aprovação comercial
 
 - Validar preços atuais, disponibilidade, sabores de gelados e ingredientes não detalhados.
 - Confirmar endereço, horários, modalidades de pedido, área e regras de entrega, frete e prazo.
-- Obter logotipo original e fotografias com autorização de uso. As imagens do Canva foram usadas apenas para conferência, sem reutilização no site público.
+- Obter logotipo original e fotografias em resolução adequada. A autorização de uso já foi confirmada pelo usuário; as miniaturas do Canva foram usadas para conferência.
 - Receber a história verdadeira do restaurante e aprovar os textos e a identidade adaptada.
 - O original tem resolução limitada nas miniaturas; confirmar detalhes finos com PDF de alta resolução antes de uso comercial. Todos os valores exibidos foram legíveis na conferência visual.

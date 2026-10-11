@@ -2,4 +2,5 @@ node_modules/
 dist/
 *.tsbuildinfo
 .openai/*.zip
+.openai/*.tar.gz
 test-results/
