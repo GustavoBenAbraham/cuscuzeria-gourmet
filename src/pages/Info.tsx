@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Instagram, MessageCircle, Wheat } from "lucide-react";
 import { restaurant } from "../data/restaurant";
+import { DeliveryCallout } from "../components/ui/DeliveryCallout";
 export function Story() {
   return (
     <section className="wrap section info">
@@ -42,6 +43,7 @@ export function Contact() {
         diretamente com o restaurante.
       </p>
       <div className="contact-links">
+        <DeliveryCallout />
         <a
           className="button"
           href={`https://wa.me/${restaurant.phone}`}
@@ -68,8 +70,8 @@ export function Contact() {
         </a>
       </div>
       <p className="notice">
-        Endereço, horários e modalidades de atendimento aguardam confirmação do
-        estabelecimento.
+        Entregas pelo iFood. Endereço, horários e atendimento para retirada
+        aguardam confirmação do estabelecimento.
       </p>
     </section>
   );

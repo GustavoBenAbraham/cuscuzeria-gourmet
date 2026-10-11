@@ -60,7 +60,7 @@ describe("WhatsApp", () => {
     expect(message).toContain("70,00");
     expect(message).toContain("João & Maria");
     expect(message).toContain("Sem vinagrete");
-    expect(message).toContain("A combinar");
+    expect(message).toContain("Entregas pelo iFood");
     expect(message).toContain("confirmar a disponibilidade");
     expect(url).not.toContain("João");
   });

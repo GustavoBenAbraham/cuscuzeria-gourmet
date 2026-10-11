@@ -25,6 +25,7 @@ export interface RestaurantInfo {
   phone: string;
   instagram: string;
   menu: string;
+  deliveryUrl: string;
   confirmedOrderModes: ("retirada" | "entrega")[];
 }
 export interface OrderItem {

@@ -25,8 +25,10 @@ O usuário confirmou nesta conversa que já possui autorização. O uso do logot
 
 ## Pendências para aprovação comercial
 
+Entrega confirmada pelo usuário via iFood: https://www.ifood.com.br/delivery/sao-paulo-sp/cuscuzeria-gourmet-sabor-nordestino-vila-teresinha/2ef57a2d-05c7-438d-8dac-9768740477d5?UTM_Medium=share . A página não pôde ser lida pela ferramenta de pesquisa; o vínculo e o canal de entrega foram fornecidos diretamente pelo usuário. Nenhum preço, prazo, avaliação ou endereço foi deduzido da URL. Os botões abrem a loja no iFood, sem transferência automática do carrinho. O WhatsApp é apresentado como contato e consulta sobre a seleção.
+
 - Validar preços atuais, disponibilidade, sabores de gelados e ingredientes não detalhados.
-- Confirmar endereço, horários, modalidades de pedido, área e regras de entrega, frete e prazo.
+- Confirmar endereço, horários e atendimento para retirada. Para delivery, disponibilidade, preços, área de atendimento, frete e prazo são consultados no iFood.
 - Obter logotipo original e fotografias em resolução adequada. A autorização de uso já foi confirmada pelo usuário; as miniaturas do Canva foram usadas para conferência.
 - Receber a história verdadeira do restaurante e aprovar os textos e a identidade adaptada.
 - O original tem resolução limitada nas miniaturas; confirmar detalhes finos com PDF de alta resolução antes de uso comercial. Todos os valores exibidos foram legíveis na conferência visual.

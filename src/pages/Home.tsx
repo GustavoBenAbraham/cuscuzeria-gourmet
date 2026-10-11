@@ -3,6 +3,7 @@ import { ArrowUpRight, ArrowRight, Wheat, Heart, Utensils } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { products } from "../data/catalog";
 import { ProductCard } from "../components/products/ProductCard";
+import { restaurant } from "../data/restaurant";
 
 export function Home() {
   const reducedMotion = useReducedMotion();
@@ -35,9 +36,14 @@ export function Home() {
             <Link className="button" to="/cardapio">
               Explorar cardápio <ArrowUpRight size={19} />
             </Link>
-            <Link className="text-link" to="/pedido">
-              Fazer meu pedido <ArrowRight size={17} />
-            </Link>
+            <a
+              className="text-link"
+              href={restaurant.deliveryUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Pedir no iFood <ArrowRight size={17} />
+            </a>
           </div>
           <div className="hero-caption">
             <Wheat size={22} />
@@ -103,8 +109,8 @@ export function Home() {
             ))}
         </div>
         <p className="source-caption">
-          Valores transcritos do cardápio oficial. Confirme disponibilidade e
-          valor final pelo WhatsApp.
+          Valores transcritos do cardápio oficial. Para delivery, consulte os
+          preços e a disponibilidade no iFood.
         </p>
       </section>
       <section className="story-band">
@@ -178,9 +184,14 @@ export function Home() {
             começa por aqui.
           </h2>
         </div>
-        <Link className="button light" to="/cardapio">
-          Montar meu pedido <ArrowUpRight size={20} />
-        </Link>
+        <a
+          className="button light"
+          href={restaurant.deliveryUrl}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Pedir no iFood <ArrowUpRight size={20} />
+        </a>
       </section>
     </>
   );

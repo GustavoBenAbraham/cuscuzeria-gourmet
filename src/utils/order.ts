@@ -74,21 +74,21 @@ export function whatsappUrl(order: Order) {
       0,
     ) / 100;
   const message = [
-    `Olá! Gostaria de fazer um pedido na ${restaurant.name}.`,
+    `Olá! Gostaria de consultar estes itens do cardápio da ${restaurant.name}.`,
     "",
-    "MEU PEDIDO",
+    "MINHA SELEÇÃO",
     ...order.items.map(
       (i) =>
         `${i.quantity}x ${i.name} — ${money(i.price * i.quantity)}${i.note ? `\n  Observação: ${i.note}` : ""}`,
     ),
     "",
     `Observações: ${order.note || "Nenhuma"}`,
-    `Subtotal: ${money(total)}`,
+    `Subtotal de referência do cardápio: ${money(total)}`,
     `Nome: ${order.name}`,
-    `Tipo de pedido: ${order.mode || "A combinar com o restaurante"}`,
+    `Atendimento: ${order.mode || "Consulta pelo WhatsApp. Entregas pelo iFood."}`,
     ...(order.mode === "entrega" ? [`Endereço: ${order.address || ""}`] : []),
     "",
-    "Poderiam confirmar a disponibilidade, o valor final e o prazo?",
+    "Poderiam confirmar a disponibilidade e esclarecer minhas observações?",
   ].join("\n");
   return `https://wa.me/${restaurant.phone}?text=${encodeURIComponent(message)}`;
 }

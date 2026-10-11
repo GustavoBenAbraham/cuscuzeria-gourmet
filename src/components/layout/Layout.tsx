@@ -63,9 +63,14 @@ export function Layout() {
               <ShoppingBag size={22} />
               <span>{count}</span>
             </Link>
-            <Link className="button small desktop" to="/cardapio">
-              Fazer pedido <ArrowUpRight size={16} />
-            </Link>
+            <a
+              className="button small desktop"
+              href={restaurant.deliveryUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Pedir no iFood <ArrowUpRight size={16} />
+            </a>
             <button
               className="mobile-toggle"
               aria-label={open ? "Fechar menu" : "Abrir menu"}
@@ -98,6 +103,9 @@ export function Layout() {
           </div>
           <div>
             <h3>Vamos conversar?</h3>
+            <a href={restaurant.deliveryUrl} target="_blank" rel="noreferrer">
+              <ShoppingBag size={17} /> Delivery pelo iFood
+            </a>
             <a
               href={`https://wa.me/${restaurant.phone}`}
               target="_blank"

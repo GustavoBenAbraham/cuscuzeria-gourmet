@@ -25,7 +25,9 @@ export function ProductCard({ product: p }: { product: Product }) {
         <p>{p.description}</p>
         <div className="product-bottom">
           <strong>{p.price === null ? "A confirmar" : money(p.price)}</strong>
-          {!p.available || p.price === null || p.verificationStatus !== "verified" ? (
+          {!p.available ||
+          p.price === null ||
+          p.verificationStatus !== "verified" ? (
             <span>Indisponível</span>
           ) : n ? (
             <div className="stepper">

@@ -41,8 +41,9 @@ tests/                 verificações de navegador
 - Pesquisa sem distinção de acentos, categorias geradas a partir dos produtos, filtro de destaques e ordenação.
 - Quantidades de 1 a 99, remoção, notas por item, subtotal calculado em centavos e carrinho persistido. Dados inválidos ou produtos indisponíveis são descartados na recuperação.
 - Nome e observações gerais validados. Dados do formulário permanecem em memória; somente itens e notas do carrinho são salvos no navegador.
-- O usuário prepara a mensagem e usa um link para abrir WhatsApp. Precisa confirmar o envio no WhatsApp; o site não presume recebimento nem limpa o carrinho automaticamente.
-- Nenhuma modalidade é oferecida sem confirmação. Para ativá-la, edite `confirmedOrderModes` em `src/data/restaurant.ts`; a opção entrega exige endereço.
+- A entrega é feita pelo iFood, no link oficial informado pelo usuário e configurado em `deliveryUrl`. Os botões abrem a loja; o cliente seleciona os itens e finaliza o pedido por lá. O carrinho local não é transferido automaticamente. Preços, disponibilidade, frete e prazo de delivery são os exibidos no iFood.
+- O WhatsApp permite consultar o restaurante sobre os itens selecionados. O usuário prepara a mensagem e confirma o envio no WhatsApp; o site não presume recebimento nem limpa o carrinho automaticamente.
+- `confirmedOrderModes` refere-se somente a modalidades atendidas diretamente pelo WhatsApp e permanece vazio. A entrega pelo iFood não habilita coleta de endereço ou fechamento de delivery pelo WhatsApp. Retirada ainda não foi confirmada.
 - Sem frete, pagamento, prazo ou avaliação inventados. Preços representam a fonte consultada, não uma confirmação de vigência comercial.
 - HTML semântico, foco por teclado, link para pular navegação, rótulos de formulário, erros anunciados, movimento reduzido, metadados básicos e Restaurant JSON-LD apenas com dados documentados.
 

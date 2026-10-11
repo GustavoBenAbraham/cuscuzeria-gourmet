@@ -1,5 +1,41 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap");
 @import "tailwindcss";
+.delivery-callout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px;
+  margin: 28px 0;
+  background: #eee7d8;
+  border: 1px solid #d8cfbd;
+  border-radius: 5px;
+}
+.delivery-callout h2 {
+  font-size: 25px;
+  letter-spacing: -0.025em;
+  margin-bottom: 9px;
+}
+.delivery-callout p {
+  font-size: 13px;
+  max-width: 680px;
+}
+.delivery-callout .delivery-hint {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.delivery-callout .button {
+  flex-shrink: 0;
+}
+@media (max-width: 760px) {
+  .delivery-callout {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 18px;
+  }
+}
 .hero-photo {
   position: absolute;
   inset: 0;

@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { restaurant } from "../src/data/restaurant";
 test("layout sem overflow em mobile, tablet e desktop", async ({ page }) => {
   for (const width of [360, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
@@ -41,6 +42,17 @@ test("busca, carrinho persistido, validação e checkout WhatsApp", async ({
     .click();
   await page.goto("/pedido");
   await expect(
+    page
+      .getByRole("main")
+      .getByRole("link", { name: "Pedir no iFood", exact: true }),
+  ).toHaveAttribute("href", restaurant.deliveryUrl);
+  await expect(
+    page.getByText("O carrinho deste site não é transferido automaticamente.", {
+      exact: false,
+    }),
+  ).toBeVisible();
+  await expect(page.getByLabel("Endereço", { exact: true })).toHaveCount(0);
+  await expect(
     page.getByRole("heading", { name: "Cuscuz Carne Seca e Catupiry" }),
   ).toBeVisible();
   await page
@@ -54,24 +66,20 @@ test("busca, carrinho persistido, validação e checkout WhatsApp", async ({
   await expect(
     page.getByText("R$ 70,00", { exact: true }).first(),
   ).toBeVisible();
-  await page
-    .getByRole("button", { name: "Preparar pedido para WhatsApp" })
-    .click();
+  await page.getByRole("button", { name: "Consultar pelo WhatsApp" }).click();
   await expect(
     page.getByText("Informe seu nome (pelo menos 2 caracteres)."),
   ).toBeVisible();
   await page.getByLabel("Seu nome").fill("João & Maria");
   await page.getByLabel("Observações gerais").fill("Obrigado!");
-  await page
-    .getByRole("button", { name: "Preparar pedido para WhatsApp" })
-    .click();
+  await page.getByRole("button", { name: "Consultar pelo WhatsApp" }).click();
   const url = await page
     .getByRole("link", { name: "Abrir WhatsApp", exact: true })
     .getAttribute("href");
   expect(url).toContain("https://wa.me/5511990175768?text=");
   expect(decodeURIComponent(url!)).toContain("2x Cuscuz Carne Seca e Catupiry");
   expect(decodeURIComponent(url!)).toContain("Sem cebola");
-  expect(decodeURIComponent(url!)).toContain("A combinar");
+  expect(decodeURIComponent(url!)).toContain("Entregas pelo iFood");
   await page
     .getByRole("button", {
       name: "Remover Cuscuz Carne Seca e Catupiry",

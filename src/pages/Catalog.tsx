@@ -3,6 +3,7 @@ import { Search, SlidersHorizontal } from "lucide-react";
 import type { Product, Category } from "../types";
 import { catalogService } from "../services/catalog";
 import { ProductCard } from "../components/products/ProductCard";
+import { DeliveryCallout } from "../components/ui/DeliveryCallout";
 const normalize = (s: string) =>
   s
     .normalize("NFD")
@@ -46,6 +47,7 @@ export function Catalog() {
         Nosso <em>cardápio.</em>
       </h1>
       <p>Cuscuz e muito mais. Encontre o seu próximo sabor.</p>
+      <DeliveryCallout />
       <div className="catalog-controls">
         <label className="search">
           <Search size={20} />
@@ -128,8 +130,8 @@ export function Catalog() {
         </div>
       )}
       <p className="source-caption">
-        Fonte: cardápio oficial, 4 páginas. Valores e disponibilidade sujeitos à
-        confirmação do restaurante. Imagens ilustrativas.
+        Fonte: cardápio oficial, 4 páginas. Para delivery, valem os preços e a
+        disponibilidade exibidos no iFood. Imagens ilustrativas.
       </p>
     </section>
   );

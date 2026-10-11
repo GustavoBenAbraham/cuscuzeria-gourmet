@@ -8,6 +8,7 @@ import { useCart } from "../hooks/useCart";
 import { products } from "../data/catalog";
 import { restaurant } from "../data/restaurant";
 import { money, whatsappUrl } from "../utils/order";
+import { DeliveryCallout } from "../components/ui/DeliveryCallout";
 const schema = z
   .object({
     name: z
@@ -71,6 +72,7 @@ export function Cart() {
       <h1>
         Seu <em>pedido.</em>
       </h1>
+      <DeliveryCallout cart={cart.items.length > 0} />
       {!cart.items.length ? (
         <div className="empty">
           <ShoppingBag size={45} />
@@ -159,13 +161,14 @@ export function Cart() {
             onSubmit={handleSubmit(submit)}
             onChange={() => setUrl("")}
           >
-            <h2>Vamos combinar?</h2>
+            <h2>Dúvidas sobre sua seleção?</h2>
             <div className="subtotal">
               <span>Subtotal · {cart.count} itens</span>
               <strong>{money(cart.total)}</strong>
             </div>
             <p className="form-hint">
-              Frete e valor final serão confirmados pelo restaurante.
+              Valores de referência do cardápio. O total do delivery é calculado
+              no iFood.
             </p>
             <label>
               Seu nome
@@ -206,7 +209,8 @@ export function Cart() {
               </>
             ) : (
               <p className="notice">
-                Entrega ou retirada: a combinar no WhatsApp.
+                Use o WhatsApp para consultar o restaurante sobre estes itens.
+                Para entrega, faça seu pedido no iFood.
               </p>
             )}
             {errors.mode && (
@@ -234,13 +238,13 @@ export function Cart() {
               </p>
             )}
             <button type="submit" className="button">
-              Preparar pedido para WhatsApp <ArrowUpRight size={18} />
+              Consultar pelo WhatsApp <ArrowUpRight size={18} />
             </button>
             {url && (
               <div className="ready" role="status">
                 <p>
-                  Seu pedido está preparado. Abra o WhatsApp e confirme o envio
-                  da mensagem.
+                  Sua consulta está preparada. Abra o WhatsApp e confirme o
+                  envio da mensagem.
                 </p>
                 <a
                   className="button"
@@ -253,9 +257,9 @@ export function Cart() {
               </div>
             )}
             <p className="form-hint">
-              Nenhum pedido é enviado automaticamente. Disponibilidade, valor
-              final e prazo devem ser confirmados na conversa. Seu nome não será
-              salvo neste site.
+              A mensagem é uma consulta e precisa ser enviada por você no
+              WhatsApp. O pedido de entrega é finalizado no iFood. Seu nome não
+              será salvo neste site.
             </p>
           </form>
         </div>
