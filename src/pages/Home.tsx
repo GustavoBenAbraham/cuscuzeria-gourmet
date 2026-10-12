@@ -1,197 +1,211 @@
-import { Link } from "react-router-dom";
-import { ArrowUpRight, ArrowRight, Wheat, Heart, Utensils } from "lucide-react";
+﻿import {
+  ArrowUpRight,
+  ArrowDown,
+  MessageCircle,
+  Utensils,
+  Heart,
+  ShoppingBag,
+} from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import { products } from "../data/catalog";
-import { ProductCard } from "../components/products/ProductCard";
 import { restaurant } from "../data/restaurant";
+import { Catalog } from "./Catalog";
+import { SertaoArt } from "../components/ui/SertaoArt";
 
 export function Home() {
   const reducedMotion = useReducedMotion();
   return (
     <>
-      <section className="hero wrap">
-        <motion.div
-          className="hero-copy"
-          initial={reducedMotion ? false : { opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="eyebrow">
-            <span /> TRADIÇÃO QUE TEM SABOR
+      <section className="nordeste-hero">
+        <img
+          className="nordeste-hero-photo"
+          src="/images/cuscuz-ilustrativo.jpg"
+          width="960"
+          height="1200"
+          fetchPriority="high"
+          alt="Composição ilustrativa de cuscuz com carne seca e queijo coalho, criada por IA"
+        />
+        <div className="nordeste-hero-shade" />
+        <div className="wrap nordeste-hero-inner">
+          <motion.div
+            className="hero-copy"
+            initial={reducedMotion ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45 }}
+          >
+            <div className="eyebrow">
+              CUSCUZERIA GOURMET <span aria-hidden="true">✳</span> SABOR
+              NORDESTINO
+            </div>
+            <h1>
+              O Nordeste
+              <br />
+              mora no
+              <br />
+              <em>nosso sabor.</em>
+            </h1>
+            <p>
+              Cuscuz de milho, queijo coalho e carne seca.
+              <br />
+              Combinações que carregam a nossa cultura
+              <br className="desktop-break" /> e dão vontade de chegar mais.
+            </p>
+            <div className="hero-buttons">
+              <a className="button corn-button" href="#cardapio">
+                Conhecer o cardápio <ArrowDown size={18} />
+              </a>
+              <a
+                className="button outline-button"
+                href={restaurant.deliveryUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Pedir no iFood <ArrowUpRight size={19} />
+              </a>
+            </div>
+            <div className="hero-signature">
+              <span className="signature-star" aria-hidden="true">
+                ✳
+              </span>
+              <span>
+                DA NOSSA CULTURA.
+                <br />
+                <b>PARA A SUA MESA.</b>
+              </span>
+            </div>
+          </motion.div>
+          <div className="hero-food-caption">
+            <span>UM CLÁSSICO DO NORDESTE</span>
+            <strong>Cuscuz, do nosso jeito.</strong>
+            <small>Imagem ilustrativa criada por IA</small>
           </div>
-          <h1>
-            Um pedacinho
+        </div>
+        <div className="cordel-edge" aria-hidden="true" />
+      </section>
+      <div className="flavor-ribbon" aria-label="Sabores do cardápio">
+        <span>CUSCUZ DE MILHO</span>
+        <i>✳</i>
+        <span>QUEIJO COALHO</span>
+        <i>✳</i>
+        <span>CARNE SECA</span>
+        <i>✳</i>
+        <span>TAPIOCA</span>
+        <i>✳</i>
+        <span>UM DOCE FINAL</span>
+      </div>
+      <section className="nordeste-welcome">
+        <div className="wrap welcome-grid">
+          <div className="welcome-illustration">
+            <SertaoArt />
+            <span>ONDE TEM CUSCUZ, TEM NORDESTE.</span>
+          </div>
+          <div className="welcome-copy">
+            <div className="eyebrow">CHEGUE MAIS, A MESA É SUA.</div>
+            <h2>
+              Tem raiz.
+              <br />
+              Tem história.
+              <br />
+              <em>Tem sabor nordestino.</em>
+            </h2>
+            <p>
+              O milho é o começo. Queijo coalho, carne seca, calabresa e coco
+              completam esse encontro de sabores. Na Cuscuzeria Gourmet, o
+              cardápio vai do cuscuz tradicional às combinações recheadas e
+              doces.
+            </p>
+            <a className="text-link" href="#cardapio">
+              Encontre seu favorito <ArrowUpRight size={18} />
+            </a>
+          </div>
+        </div>
+      </section>
+      <div className="menu-paper">
+        <Catalog embedded />
+      </div>
+      <section className="nordeste-experience">
+        <div className="wrap">
+          <div className="eyebrow">PRA CADA VONTADE, UM SABOR.</div>
+          <h2>
+            Mais que cuscuz.
             <br />
-            do <em>Nordeste</em>
-            <br />
-            em cada sabor.
-          </h1>
-          <p>
-            Cuscuz, queijo coalho, carne seca…
-            <br />
-            Encontre os sabores da culinária nordestina em um cardápio feito
-            para explorar.
-          </p>
-          <div className="hero-buttons">
-            <Link className="button" to="/cardapio">
-              Explorar cardápio <ArrowUpRight size={19} />
-            </Link>
+            <em>Um cardápio pra descobrir.</em>
+          </h2>
+          <div className="experience-grid">
+            <div>
+              <Utensils size={30} />
+              <h3>Do jeitinho que você gosta</h3>
+              <p>
+                Tradicional, com recheio ou doce. Explore as 14 combinações de
+                cuscuz do cardápio.
+              </p>
+            </div>
+            <div>
+              <ShoppingBag size={30} />
+              <h3>Do almoço ao lanche</h3>
+              <p>
+                Pratos executivos, tapiocas, lanches, porções e salgados para
+                escolher.
+              </p>
+            </div>
+            <div>
+              <Heart size={30} />
+              <h3>Deixe espaço para o doce</h3>
+              <p>
+                Romeu & Julieta, creme de avelã, pudim, bolo de pote e gelados.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="nordeste-delivery">
+        <div className="wrap delivery-grid">
+          <div>
+            <div className="eyebrow">O NORDESTE TAMBÉM VAI ATÉ VOCÊ.</div>
+            <h2>
+              Bateu a vontade?
+              <br />
+              <em>É só pedir.</em>
+            </h2>
+            <p>
+              Faça seu pedido de entrega pelo iFood.
+              <br />
+              Consulte por lá o cardápio disponível, o frete e o prazo.
+            </p>
             <a
-              className="text-link"
+              className="button corn-button"
               href={restaurant.deliveryUrl}
               target="_blank"
               rel="noreferrer"
             >
-              Pedir no iFood <ArrowRight size={17} />
+              Pedir no iFood <ArrowUpRight size={20} />
             </a>
           </div>
-          <div className="hero-caption">
-            <Wheat size={22} />
-            <span>
-              Raízes nordestinas.
+          <div className="delivery-contact">
+            <span className="contact-kicker">VAMOS CONVERSAR?</span>
+            <h3>
+              Uma dúvida antes
               <br />
-              <b>Novas combinações para descobrir.</b>
-            </span>
-          </div>
-        </motion.div>
-        <div className="hero-visual">
-          <div className="sun-stamp">
-            SABOR QUE
-            <br />
-            <strong>ACOLHE</strong>
-            <span>✳</span>
-          </div>
-          <span className="visual-number">01 / À MESA</span>
-          <img
-            className="hero-photo"
-            src="/images/cuscuz-ilustrativo.jpg"
-            width="960"
-            height="1200"
-            fetchPriority="high"
-            alt="Imagem ilustrativa criada por IA: cuscuz de milho com queijo coalho e carne seca"
-          />
-          <div className="dish-caption">
-            <span>O ENCONTRO DOS SABORES</span>
-            <strong>Cuscuz & afeto</strong>
-            <small>Imagem ilustrativa criada por IA</small>
-          </div>
-          <span className="vertical-text">MILHO · TRADIÇÃO · NORDESTE</span>
-        </div>
-      </section>
-      <div className="ribbon">
-        <span>CUSCUZ DE RESPEITO</span>
-        <i>✳</i>
-        <span>TEM SABOR DE NORDESTE</span>
-        <i>✳</i>
-        <span>DA MASSA AO RECHEIO</span>
-        <i>✳</i>
-        <span>ESCOLHA SEU FAVORITO</span>
-      </div>
-      <section className="section wrap">
-        <div className="section-heading">
-          <div>
-            <div className="eyebrow">PARA COMEÇAR BEM</div>
-            <h2>
-              Sabores que merecem
-              <br />
-              um lugar na sua mesa.
-            </h2>
-          </div>
-          <Link className="text-link" to="/cardapio">
-            Ver todo o cardápio <ArrowUpRight size={18} />
-          </Link>
-        </div>
-        <div className="product-grid">
-          {products
-            .filter((p) => p.featured)
-            .map((p) => (
-              <ProductCard key={p.id} product={p} />
-            ))}
-        </div>
-        <p className="source-caption">
-          Valores transcritos do cardápio oficial. Para delivery, consulte os
-          preços e a disponibilidade no iFood.
-        </p>
-      </section>
-      <section className="story-band">
-        <div className="wrap story-grid">
-          <div className="story-art">
-            <Wheat size={90} strokeWidth={1} />
-            <span>
-              DA TERRA.
-              <br />
-              DA TRADIÇÃO.
-              <br />
-              <em>DO NORDESTE.</em>
-            </span>
-            <small>Um encontro de ingredientes e cultura</small>
-          </div>
-          <div>
-            <div className="eyebrow">NOSSA IDENTIDADE</div>
-            <h2>
-              O Nordeste é<br />
-              nosso ingrediente.
-            </h2>
-            <p>
-              Milho, queijo coalho e carne seca se encontram no nosso cardápio.
-              Dos cuscuzes tradicionais aos recheios especiais, cada escolha é
-              um convite a conhecer essas combinações.
-            </p>
-            <Link className="text-link" to="/nossa-historia">
-              Conhecer nossa proposta <ArrowUpRight size={18} />
-            </Link>
+              de escolher?
+            </h3>
+            <p>Fale diretamente com a Cuscuzeria Gourmet.</p>
+            <a
+              href={`https://wa.me/${restaurant.phone}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <MessageCircle size={21} /> (11) 99017-5768{" "}
+              <ArrowUpRight size={17} />
+            </a>
+            <a
+              className="instagram-contact"
+              href={restaurant.instagram}
+              target="_blank"
+              rel="noreferrer"
+            >
+              @cuscuzgourmmet <ArrowUpRight size={16} />
+            </a>
           </div>
         </div>
-      </section>
-      <section className="section wrap">
-        <div className="eyebrow">DO SALGADO AO DOCE</div>
-        <h2>Um cardápio. Muitas descobertas.</h2>
-        <div className="experience-grid">
-          {[
-            [
-              Wheat,
-              "O milho é protagonista",
-              "Do Original aos recheados: explore todas as versões de cuscuz.",
-            ],
-            [
-              Utensils,
-              "Além do cuscuz",
-              "Tapiocas, pratos executivos, lanches e porções para escolher.",
-            ],
-            [
-              Heart,
-              "Um final doce",
-              "Romeu & Julieta, coco, creme de avelã e outras sobremesas.",
-            ],
-          ].map(([Icon, title, desc]) => {
-            const I = Icon as typeof Wheat;
-            return (
-              <div key={String(title)}>
-                <I size={30} />
-                <h3>{String(title)}</h3>
-                <p>{String(desc)}</p>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-      <section className="cta wrap">
-        <div>
-          <div className="eyebrow">BATEU AQUELA VONTADE?</div>
-          <h2>
-            Seu próximo sabor
-            <br />
-            começa por aqui.
-          </h2>
-        </div>
-        <a
-          className="button light"
-          href={restaurant.deliveryUrl}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Pedir no iFood <ArrowUpRight size={20} />
-        </a>
       </section>
     </>
   );

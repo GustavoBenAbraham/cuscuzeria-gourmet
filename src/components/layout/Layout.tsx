@@ -7,19 +7,14 @@ import {
   Instagram,
   ArrowUpRight,
   MessageCircle,
-  Wheat,
 } from "lucide-react";
 import { useCart } from "../../hooks/useCart";
 import { restaurant } from "../../data/restaurant";
+import { BrandArtwork } from "../ui/BrandArtwork";
 export function Brand() {
   return (
     <span className="brand">
-      <span className="brand-symbol">
-        <Wheat size={28} />
-      </span>
-      <span>
-        Cuscuzeria<small>G O U R M E T</small>
-      </span>
+      <BrandArtwork />
     </span>
   );
 }
@@ -32,7 +27,7 @@ export function Layout() {
         Pular para o conteúdo
       </a>
       <div className="topline">
-        DA NOSSA CULTURA PARA A SUA MESA <span>•</span> SABORES DO NORDESTE
+        SABOR NORDESTINO <span>✳</span> DELIVERY PELO IFOOD
       </div>
       <header>
         <div className="header-inner">
@@ -64,7 +59,7 @@ export function Layout() {
               <span>{count}</span>
             </Link>
             <a
-              className="button small desktop"
+              className="button small desktop ifood-button"
               href={restaurant.deliveryUrl}
               target="_blank"
               rel="noreferrer"
@@ -103,6 +98,24 @@ export function Layout() {
           </div>
           <div>
             <h3>Vamos conversar?</h3>
+            <div className="social-links">
+              <a
+                className="social-link whatsapp-link"
+                href={`https://wa.me/${restaurant.phone}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <MessageCircle size={17} /> WhatsApp
+              </a>
+              <a
+                className="social-link instagram-link"
+                href={restaurant.instagram}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Instagram size={17} /> Instagram
+              </a>
+            </div>
             <a href={restaurant.deliveryUrl} target="_blank" rel="noreferrer">
               <ShoppingBag size={17} /> Delivery pelo iFood
             </a>
@@ -110,6 +123,7 @@ export function Layout() {
               href={`https://wa.me/${restaurant.phone}`}
               target="_blank"
               rel="noreferrer"
+              className="contact-whatsapp"
             >
               <MessageCircle size={17} /> (11) 99017-5768
             </a>

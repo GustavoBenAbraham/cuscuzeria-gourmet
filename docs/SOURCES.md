@@ -15,13 +15,15 @@ Total: **64 opções**, incluindo os sabores que aparecem agrupados no original.
 
 Associações que demonstram por que a ordem de texto não deve ser usada: X-salada = R$ 18,00; porção de batata e nuggets = R$ 50,00; tapioca Crocante = R$ 32,00; tapioca Calabresa = R$ 28,00; picolé cremoso = R$ 3,50. O preço de beijinho R$ 2,00 aparece como texto residual na extração, mas não existe como produto independente na página renderizada; não foi publicado. Beijinho é uma tapioca de R$ 20,00.
 
-A identidade observada no Canva usa amarelo, laranja, cactos, elementos nordestinos e um selo com a frase “Sabor Nordestino”. O site adota uma interpretação editorial dessa identidade com creme, milho, terracota e oliva. A marca tipográfica e as ilustrações SVG são provisórias e não reproduzem o logotipo oficial como se fossem aprovadas.
+A identidade observada no Canva usa amarelo, laranja, cactos, elementos nordestinos e um selo com a frase “Sabor Nordestino”. O usuário forneceu a logo original em `public/images/logo cuscuzeira gourmet.jpg` (150 × 150 px), agora usada diretamente no cabeçalho e no rodapé, preservando suas proporções. A versão SVG alternativa não é usada como marca oficial.
+
+O refinamento solicitado usa marrom escuro, amarelo-milho, verde e creme, tipografia de destaque inspirada em cordel e uma composição SVG original do sertão. A referência https://fortalcuscuz.com.br/ foi analisada visualmente no navegador: foto ampla, contraste escuro/amarelo e organização de seções. Nenhuma foto, logotipo, avaliação, endereço ou informação comercial dessa referência foi reaproveitada. O cardápio interativo aparece na home e na página dedicada; as quatro páginas originais também podem ser consultadas no próprio site.
 
 Instagram informado: https://www.instagram.com/cuscuzgourmmet/ — acesso limitado por throttling. Busca pública pelo identificador não retornou resultados. Não foi possível confirmar biografia, fotografias, endereço, horários ou história por essa fonte.
 
 WhatsApp informado no briefing e telefone reproduzido na página 4: https://wa.me/5511990175768. O perfil @cuscuzgourmmet também aparece na página 4.
 
-O usuário confirmou nesta conversa que já possui autorização. O uso do logotipo e das fotografias das fontes fornecidas não depende de uma nova autorização. Continua pendente somente a obtenção dos arquivos em resolução adequada: as páginas disponíveis pelo conector medem aproximadamente 380 × 537 px, com fotografias individuais muito menores. Por isso, a versão atual usa imagens explicitamente ilustrativas, incluindo a abertura gerada por IA documentada em `IMAGE-PROMPT.md`.
+O usuário confirmou nesta conversa que já possui autorização. O uso do logotipo e das fotografias das fontes fornecidas não depende de uma nova autorização. A logo fornecida já está integrada. As fotografias disponíveis no cardápio ainda têm resolução muito pequena; a abertura usa a imagem ilustrativa por IA documentada em `IMAGE-PROMPT.md`, com indicação visível. O catálogo adota apresentação textual para evitar repetir imagens genéricas em cada produto.
 
 ## Pendências para aprovação comercial
 
@@ -29,6 +31,6 @@ Entrega confirmada pelo usuário via iFood: https://www.ifood.com.br/delivery/sa
 
 - Validar preços atuais, disponibilidade, sabores de gelados e ingredientes não detalhados.
 - Confirmar endereço, horários e atendimento para retirada. Para delivery, disponibilidade, preços, área de atendimento, frete e prazo são consultados no iFood.
-- Obter logotipo original e fotografias em resolução adequada. A autorização de uso já foi confirmada pelo usuário; as miniaturas do Canva foram usadas para conferência.
+- Obter fotografias dos pratos em resolução adequada. A logo original fornecida já está em uso; um arquivo maior é opcional para futuras aplicações impressas.
 - Receber a história verdadeira do restaurante e aprovar os textos e a identidade adaptada.
 - O original tem resolução limitada nas miniaturas; confirmar detalhes finos com PDF de alta resolução antes de uso comercial. Todos os valores exibidos foram legíveis na conferência visual.

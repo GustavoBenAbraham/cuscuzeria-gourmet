@@ -18,7 +18,7 @@ export function DeliveryCallout({ cart = false }: { cart?: boolean }) {
         )}
       </div>
       <a
-        className="button"
+        className="button ifood-button"
         href={restaurant.deliveryUrl}
         target="_blank"
         rel="noreferrer"

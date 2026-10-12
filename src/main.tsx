@@ -14,6 +14,7 @@ import { Catalog } from "./pages/Catalog";
 import { Cart } from "./pages/Cart";
 import { Story, Contact } from "./pages/Info";
 import "./styles/global.css";
+import "./styles/nordeste.css";
 function NavigationEffects() {
   const { pathname } = useLocation();
   useEffect(() => {

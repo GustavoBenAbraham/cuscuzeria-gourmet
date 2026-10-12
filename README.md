@@ -49,7 +49,11 @@ tests/                 verificações de navegador
 
 ## Atualizar catálogo e imagens
 
-Edite `src/data/catalog.ts`. Use `verificationStatus: 'pending'`, `price: null` ou `available: false` quando um item não estiver confirmado; seu botão de pedido será desabilitado. Coloque imagens autorizadas em `public/images/` e use `/images/arquivo.webp` no campo `image`. O componente usa `loading="lazy"` e preserva proporções. Os cartões usam ilustrações SVG; a abertura usa uma imagem gerada por IA em `public/images/cuscuz-ilustrativo.jpg`, identificada como ilustrativa. Prompt e método estão em `docs/IMAGE-PROMPT.md`. Não há fotografia real ou história inventada.
+Edite `src/data/catalog.ts`. Use `verificationStatus: 'pending'`, `price: null` ou `available: false` quando um item não estiver confirmado; seu botão de pedido será desabilitado. Coloque imagens autorizadas em `public/images/` e use `/images/arquivo.webp` no campo `image`. O componente usa `loading="lazy"` e preserva proporções. O catálogo usa uma apresentação textual quando não há fotografia. A abertura usa uma imagem gerada por IA em `public/images/cuscuz-ilustrativo.jpg`, identificada como ilustrativa. Prompt e método estão em `docs/IMAGE-PROMPT.md`.
+
+A logo original enviada pelo usuário está em `public/images/logo cuscuzeira gourmet.jpg`, usada pelo componente `BrandArtwork`. O arquivo tem 150 × 150 px e é exibido sem distorção. A direção visual nordestina está em `src/styles/nordeste.css`, com composição do sertão em `SertaoArt`. A referência Fortal Cuscuz foi usada para orientar a organização visual; nenhum conteúdo comercial ou fotografia de outro estabelecimento foi incorporado.
+
+O cardápio aparece na home (categoria cuscuzes selecionada inicialmente) e em `/cardapio` (todas as 64 opções). Busca, categorias e controles funcionam nas duas telas. A seção expansível “Ver cardápio original” mostra as quatro páginas armazenadas em `public/images/cardapio/`.
 
 `catalogService.getCatalog()` é o ponto de substituição para API REST. Preserve os tipos e IDs estáveis ao migrar para Spring Boot/PostgreSQL. A seleção local não representa reserva, estoque ou venda concluída.
 
@@ -63,4 +67,4 @@ Edite `src/data/catalog.ts`. Use `verificationStatus: 'pending'`, `price: null` 
 
 Hospede `dist/` em uma plataforma estática com fallback de URLs para `index.html`, necessário para React Router. Um exemplo Netlify está em `public/_redirects`. Em Nginx, use `try_files $uri $uri/ /index.html;`. Configure HTTPS e domínio; depois acrescente URL canônica e Open Graph com o domínio e uma imagem aprovada. O projeto possui manifesto Sites em `.openai/hosting.json` para publicação privada de demonstração.
 
-Antes de uso comercial, valide todas as pendências em [docs/SOURCES.md](docs/SOURCES.md). A autorização de uso de fotos e logotipo já foi confirmada pelo usuário; faltam os arquivos em resolução adequada. Para evolução: integrar esses arquivos, validar disponibilidade via API, criar painel de catálogo e aplicar regras reais de entrega. Fontes Google são carregadas externamente, com fallback local para serif/sans-serif; para maior privacidade e desempenho, hospede os arquivos de fontes após obter as licenças.
+Antes de uso comercial, valide todas as pendências em [docs/SOURCES.md](docs/SOURCES.md). A autorização de uso de fotos e logotipo já foi confirmada pelo usuário e a logo original está integrada. Para evolução: incorporar fotografias reais dos pratos em boa resolução, validar disponibilidade via API e criar painel de catálogo. As entregas seguem pelo iFood. Fontes Google são carregadas externamente, com fallback local para serif/sans-serif; para maior privacidade e desempenho, hospede os arquivos de fontes após obter as licenças.

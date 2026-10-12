@@ -91,6 +91,19 @@ export function Cart() {
                 permanecem nesta sessão.
               </p>
             )}
+            <div className="cart-toolbar">
+              <span>Resumo do pedido</span>
+              <button
+                type="button"
+                className="text-button"
+                onClick={() => {
+                  cart.clear();
+                  setUrl("");
+                }}
+              >
+                Limpar carrinho
+              </button>
+            </div>
             <div className="cart-items">
               {cart.items.map((i) => {
                 const p = products.find((p) => p.id === i.productId)!;

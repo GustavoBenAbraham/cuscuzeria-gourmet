@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 220" role="img" aria-label="Cuscuzeria Gourmet - Sabor Nordestino">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#2d1d0d" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <g transform="translate(0,6)" filter="url(#shadow)">
+    <g transform="translate(16,8)">
+      <path d="M20 50h90c10 0 18 8 18 18v18H2V68c0-10 8-18 18-18Z" fill="#f0c53d"/>
+      <path d="M10 70h110l-8 18H18L10 70Z" fill="#e3b32f"/>
+      <path d="M32 24c8-12 19-18 31-18s23 6 31 18l-8 12H40L32 24Z" fill="#f0c53d"/>
+      <path d="M39 20c6-10 15-15 23-15s17 5 23 15l-6 8H45l-6-8Z" fill="#f5d963"/>
+      <path d="M38 42c11-9 25-14 38-14 14 0 28 5 39 14v12H38V42Z" fill="#f7e6a4" opacity="0.45"/>
+      <path d="M55 24c7 0 13 2 18 5-2 9-7 14-18 14s-16-5-18-14c5-3 11-5 18-5Z" fill="#d97d2a" opacity="0.18"/>
+      <path d="M42 52c11 5 18 7 26 7s15-2 26-7v22H42V52Z" fill="#0d6f46" opacity="0.12"/>
+      <path d="M38 80c13 10 23 14 34 14s21-4 34-14l4 16H34l4-16Z" fill="#0e6f46"/>
+      <circle cx="58" cy="74" r="28" fill="#f4d15d"/>
+      <path d="M33 79c17-16 44-19 66 0-15 18-38 24-66 0Z" fill="#d68a2d" opacity="0.18"/>
+      <path d="M42 72c9-6 14-9 20-9s10 2 18 8c-5 7-12 11-18 11s-13-3-20-10Z" fill="#d58830" opacity="0.25"/>
+      <path d="M42 74c8 8 16 12 23 12 8 0 15-4 22-12-8 3-16 5-22 5-8 0-15-2-23-5Z" fill="#f8f1d6" opacity="0.74"/>
+    </g>
+
+    <g transform="translate(168,0)">
+      <text x="0" y="58" font-family="Impact, Haettenschweiler, 'Arial Black', sans-serif" font-size="42" font-weight="900" fill="#0d6f46" stroke="#f6cf57" stroke-width="5" paint-order="stroke fill" letter-spacing="1.8" transform="skewX(-9)">CUSCUZERIA</text>
+      <text x="12" y="128" font-family="Impact, Haettenschweiler, 'Arial Black', sans-serif" font-size="84" font-weight="900" fill="#f6d75d" stroke="#0d6f46" stroke-width="8" paint-order="stroke fill" letter-spacing="1.2" transform="skewX(-10)">GOURMET</text>
+      <path d="M12 143h286" stroke="#f0c53d" stroke-width="7" stroke-linecap="round"/>
+      <text x="16" y="176" font-family="Verdana, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="5" fill="#6f3e1e">SABOR NORDESTINO</text>
+    </g>
+  </g>
+</svg>

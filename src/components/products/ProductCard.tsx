@@ -4,24 +4,33 @@ import { useCart } from "../../hooks/useCart";
 import { money } from "../../utils/order";
 import { FoodArt } from "../ui/FoodArt";
 import { CategoryArt } from "../ui/CategoryArt";
-export function ProductCard({ product: p }: { product: Product }) {
+export function ProductCard({
+  product: p,
+  compact = false,
+}: {
+  product: Product;
+  compact?: boolean;
+}) {
+  const Heading = compact ? "h4" : "h3";
   const cart = useCart();
   const n = cart.items.find((i) => i.productId === p.id)?.quantity || 0;
   return (
-    <article className="product-card">
-      <div className="product-art">
-        {p.image ? (
-          <img src={p.image} alt={p.name} loading="lazy" />
-        ) : p.categoryId.includes("cuscuz") ? (
-          <FoodArt variant={p.categoryId} />
-        ) : (
-          <CategoryArt category={p.categoryId} />
-        )}
-        <span>Ilustração</span>
-        {p.featured && <b>Seleção da casa</b>}
-      </div>
+    <article className={`product-card${compact ? " menu-product" : ""}`}>
+      {(!compact || p.image) && (
+        <div className="product-art">
+          {p.image ? (
+            <img src={p.image} alt={p.name} loading="lazy" />
+          ) : p.categoryId.includes("cuscuz") ? (
+            <FoodArt variant={p.categoryId} />
+          ) : (
+            <CategoryArt category={p.categoryId} />
+          )}
+          {!p.image && <span>Ilustração</span>}
+          {p.featured && !compact && <b>Seleção da casa</b>}
+        </div>
+      )}
       <div className="product-body">
-        <h3>{p.name}</h3>
+        <Heading>{p.name}</Heading>
         <p>{p.description}</p>
         <div className="product-bottom">
           <strong>{p.price === null ? "A confirmar" : money(p.price)}</strong>

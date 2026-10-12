@@ -47,6 +47,7 @@ function useCartState() {
     items,
     storageError,
     quantity,
+    clear: () => setItems([]),
     note: (id: string, note: string) =>
       setItems((prev) =>
         prev.map((i) =>
