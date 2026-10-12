@@ -118,9 +118,9 @@ header {
   padding: 12px 17px;
 }
 .header-actions .ifood-button:hover {
-  background: #ffd43b;
-  color: #402811;
-  border-color: #ffd43b;
+  background: #ea1d2c;
+  color: #fff;
+  border-color: #ea1d2c;
 }
 .corn-button {
   background: #ffd43b;
