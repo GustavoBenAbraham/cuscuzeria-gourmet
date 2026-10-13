@@ -11,6 +11,8 @@ import { restaurant } from "../data/restaurant";
 import { Catalog } from "./Catalog";
 import { SertaoArt } from "../components/ui/SertaoArt";
 
+import { CordelGallery } from "../components/ui/CordelGallery";
+
 export function Home() {
   const reducedMotion = useReducedMotion();
   return (
@@ -122,6 +124,7 @@ export function Home() {
       <div className="menu-paper">
         <Catalog embedded />
       </div>
+      <CordelGallery />
       <section className="nordeste-experience">
         <div className="wrap">
           <div className="eyebrow">PRA CADA VONTADE, UM SABOR.</div>

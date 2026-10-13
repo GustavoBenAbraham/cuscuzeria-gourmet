@@ -1374,3 +1374,47 @@ footer {
     transition: none;
   }
 }
+
+/* Cordel booklets and original woodcut-inspired artwork. */
+.cordel-gallery { background: #e9d5aa; color: #34271a; padding: 82px 0 48px; overflow: hidden; border-block: 8px double #62472b; background-image: repeating-linear-gradient(100deg, transparent 0 5px, #50381904 5px 6px); }
+.cordel-heading { text-align: center; margin-bottom: 62px; }
+.cordel-heading .eyebrow { color: #78402b; }
+.cordel-heading h2 { font-family: "Bree Serif", Georgia, serif; font-size: clamp(32px, 4vw, 52px); line-height: 1.2; margin: 16px 0; }
+.cordel-heading h2 em { font-family: "Rye", Georgia, serif; font-style: normal; color: #8f3925; }
+.cordel-heading > p { font-size: 15px; }
+.cordel-clothesline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 35px; position: relative; padding: 24px 12px 16px; }
+.cordel-clothesline::before { content: ""; position: absolute; top: 0; left: -8%; width: 116%; height: 30px; border-bottom: 3px solid #685238; border-radius: 0 0 50% 50%; }
+.cordel-booklet { --cordel-paper: #f5e8c9; background: var(--cordel-paper); padding: 13px; position: relative; transform: rotate(-2deg); box-shadow: 3px 8px 0 #4b331514, 0 15px 22px #4b331514; }
+.cordel-booklet-landscape { --cordel-paper: #edbe65; transform: translateY(12px) rotate(1.5deg); }
+.cordel-booklet-music { --cordel-paper: #e8dbc0; transform: rotate(-1deg); }
+.cordel-booklet::before, .cordel-booklet::after { content: ""; width: 9px; height: 34px; position: absolute; top: -20px; background: #a17744; border: 1px solid #72502f; box-shadow: 2px 2px 0 #49321925; z-index: 1; }
+.cordel-booklet::before { left: 22%; transform: rotate(-5deg); }
+.cordel-booklet::after { right: 22%; transform: rotate(4deg); }
+.cordel-booklet-frame { border: 4px double currentColor; padding: 22px 12px 14px; text-align: center; height: 100%; }
+.cordel-edition { font-size: 8px; font-weight: 800; letter-spacing: 1.3px; }
+.cordel-booklet h3 { font-family: "Rye", Georgia, serif; font-size: clamp(19px, 2vw, 27px); line-height: 1.35; margin: 20px auto 6px; max-width: 240px; }
+.cordel-print { height: 170px; display: grid; place-items: center; margin: 4px 0 14px; border-bottom: 1px solid currentColor; }
+.cordel-print svg { width: 100%; height: 100%; max-width: 270px; }
+.cordel-verse { font-family: "Bree Serif", Georgia, serif; font-size: 16px; line-height: 1.85; margin: 0; }
+.cordel-verse span { display: block; }
+.cordel-booklet-mark { display: block; margin-top: 18px; font-size: 13px; letter-spacing: 4px; }
+.cordel-colophon { text-align: center; font-size: 11px; margin: 42px 0 0; color: #674c32; }
+.menu-paper { border-top: 6px double #87633c; }
+@media (max-width: 900px) and (min-width: 641px) {
+  .cordel-clothesline { gap: 15px; padding-inline: 0; }
+  .cordel-booklet { padding: 7px; }
+  .cordel-booklet-frame { padding-inline: 5px; }
+  .cordel-verse { font-size: 13px; }
+  .cordel-edition { font-size: 6px; letter-spacing: .7px; }
+  .cordel-print { height: 135px; }
+}
+@media (max-width: 640px) {
+  .cordel-gallery { padding: 50px 0 34px; }
+  .cordel-heading { margin-bottom: 42px; }
+  .cordel-heading > p { font-size: 13px; max-width: 260px; margin-inline: auto; }
+  .cordel-clothesline { grid-template-columns: minmax(0, 340px); justify-content: center; gap: 48px; padding-inline: 10px; }
+  .cordel-booklet-landscape { transform: rotate(1.5deg); }
+  .cordel-booklet h3 { font-size: 25px; }
+  .cordel-verse { font-size: 16px; }
+  .cordel-colophon { line-height: 1.6; }
+}
