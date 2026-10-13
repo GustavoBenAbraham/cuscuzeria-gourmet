@@ -17,7 +17,7 @@ export function CordelGallery() {
               <div className="cordel-booklet-frame">
                 <span className="cordel-edition">{copy.CordelGallery.editionLabel}{poem.number}</span>
                 <h3>{poem.title}</h3>
-                <div className="cordel-print"><img src={poem.image.src} alt={poem.image.alt} width={poem.image.width} height={poem.image.height} loading="lazy" decoding="async" /></div>
+                <div className="cordel-print"><img src={poem.image.src} alt={poem.image.alt} width={poem.image.width} height={poem.image.height} style={{ maxWidth: `${poem.image.maxWidth}%`, mixBlendMode: poem.image.blend }} loading="lazy" decoding="async" /></div>
                 <p className="cordel-verse">{poem.lines.map(line => <span key={line}>{line}</span>)}</p>
                 <span className="cordel-booklet-mark" aria-hidden="true">{copy.CordelGallery.ornament}</span>
               </div>

@@ -12,10 +12,12 @@
       "feito verso de um baião."
     ],
     "image": {
-      "src": "/images/xilografura%20nordestina%20casal.jpg",
+      "src": "/images/cordel-couple-transparent.png",
       "alt": "Xilogravura de um casal nordestino de mãos dadas",
-      "width": 538,
-      "height": 502
+      "width": 1299,
+      "height": 1211,
+      "maxWidth": 92,
+      "blend": "multiply"
     }
   },
   {
@@ -34,7 +36,9 @@
       "src": "/images/manifesto-1.png",
       "alt": "Ilustração Manifesto do Cordel, com personagem, bandeira e cacto",
       "width": 419,
-      "height": 462
+      "height": 462,
+      "maxWidth": 90,
+      "blend": "multiply"
     }
   },
   {
@@ -50,10 +54,12 @@
       "de conversa e de calor."
     ],
     "image": {
-      "src": "/images/xilografura%20os%20violeiros.jpg",
+      "src": "/images/cordel-musicians-transparent.png",
       "alt": "Xilogravura Os Violeiros, com dois músicos tocando viola",
-      "width": 783,
-      "height": 787
+      "width": 1247,
+      "height": 1261,
+      "maxWidth": 100,
+      "blend": "multiply"
     }
   }
 ]

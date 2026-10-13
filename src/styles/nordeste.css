@@ -1375,18 +1375,18 @@ footer {
 }
 
 /* Cordel booklets and original woodcut-inspired artwork. */
-.cordel-gallery { background: var(--color-cordelBackground); color: var(--color-cordelInk); padding: 82px 0 48px; overflow: hidden; border-block: 8px double var(--color-shade62472B); background-image: repeating-linear-gradient(100deg, transparent 0 5px, var(--color-shade50381904) 5px 6px); }
+.cordel-gallery { background: var(--color-cordelBackground); color: var(--color-cordelInk); padding: 82px 0 48px; overflow: hidden; border-block: 8px double var(--color-cordelFrame); background-image: repeating-linear-gradient(100deg, transparent 0 5px, var(--color-shade50381904) 5px 6px); }
 .cordel-heading { text-align: center; margin-bottom: 62px; }
-.cordel-heading .eyebrow { color: var(--color-shade78402B); }
+.cordel-heading .eyebrow { color: var(--color-cordelMuted); }
 .cordel-heading h2 { font-family: var(--font-heading); font-size: clamp(32px, 4vw, 52px); line-height: 1.2; margin: 16px 0; }
 .cordel-heading h2 em { font-family: var(--font-display); font-style: normal; color: var(--color-cordelAccent); }
 .cordel-heading > p { font-size: 15px; }
 .cordel-clothesline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 35px; position: relative; padding: 24px 12px 16px; }
-.cordel-clothesline::before { content: ""; position: absolute; top: 0; left: -8%; width: 116%; height: 30px; border-bottom: 3px solid var(--color-shade685238); border-radius: 0 0 50% 50%; }
+.cordel-clothesline::before { content: ""; position: absolute; top: 0; left: -8%; width: 116%; height: 30px; border-bottom: 3px solid var(--color-cordelWood); border-radius: 0 0 50% 50%; }
 .cordel-booklet { --cordel-paper: var(--color-cordelPaper); background: var(--cordel-paper); padding: 13px; position: relative; transform: rotate(-2deg); box-shadow: 3px 8px 0 var(--color-shade4B331514), 0 15px 22px var(--color-shade4B331514); }
 .cordel-booklet-landscape { --cordel-paper: var(--color-cordelGold); transform: translateY(12px) rotate(1.5deg); }
 .cordel-booklet-music { --cordel-paper: var(--color-cordelNeutral); transform: rotate(-1deg); }
-.cordel-booklet::before, .cordel-booklet::after { content: ""; width: 9px; height: 34px; position: absolute; top: -20px; background: var(--color-shadeA17744); border: 1px solid var(--color-shade72502F); box-shadow: 2px 2px 0 var(--color-shade49321925); z-index: 1; }
+.cordel-booklet::before, .cordel-booklet::after { content: ""; width: 9px; height: 34px; position: absolute; top: -20px; background: var(--color-cordelWood); border: 1px solid var(--color-cordelFrame); box-shadow: 2px 2px 0 var(--color-shade49321925); z-index: 1; }
 .cordel-booklet::before { left: 22%; transform: rotate(-5deg); }
 .cordel-booklet::after { right: 22%; transform: rotate(4deg); }
 .cordel-booklet-frame { border: 4px double currentColor; padding: 22px 12px 14px; text-align: center; height: 100%; }
@@ -1397,7 +1397,7 @@ footer {
 .cordel-verse { font-family: var(--font-heading); font-size: 16px; line-height: 1.85; margin: 0; }
 .cordel-verse span { display: block; }
 .cordel-booklet-mark { display: block; margin-top: 18px; font-size: 13px; letter-spacing: 4px; }
-.cordel-colophon { text-align: center; font-size: 11px; margin: 42px 0 0; color: var(--color-shade674C32); }
+.cordel-colophon { text-align: center; font-size: 11px; margin: 42px 0 0; color: var(--color-cordelMuted); }
 .menu-paper { border-top: 6px double var(--color-shade87633C); }
 @media (max-width: 900px) and (min-width: 641px) {
   .cordel-clothesline { gap: 15px; padding-inline: 0; }
@@ -1422,3 +1422,15 @@ footer {
 .cordel-print { display: block; height: 270px; padding: 8px 0 16px; }
 .cordel-print img { display: block; width: 100%; height: 100%; object-fit: contain; }
 @media (min-width: 641px) and (max-width: 900px) { .cordel-print { height: 170px; } }
+
+/* Align supplied transparent prints and keep the verse area separate. */
+.cordel-booklet { isolation: isolate; }
+.cordel-booklet-frame { display: flex; flex-direction: column; align-items: stretch; }
+.cordel-booklet h3 { min-height: 74px; display: flex; align-items: center; justify-content: center; }
+.cordel-print { display: flex; align-items: center; justify-content: center; flex: 0 0 280px; height: 280px; margin: 6px 0 18px; padding: 8px 0 18px; }
+.cordel-print img { min-height: 0; max-height: 100%; object-position: center bottom; }
+.cordel-verse { flex: 1; }
+@media (min-width: 641px) and (max-width: 900px) { .cordel-print { height: 190px; flex-basis: 190px; } .cordel-booklet h3 { min-height: 78px; } }
+@media (max-width: 640px) { .cordel-print { height: 260px; flex-basis: 260px; } }
+
+.cordel-heading > p, .cordel-verse { color: var(--color-cordelInk); }

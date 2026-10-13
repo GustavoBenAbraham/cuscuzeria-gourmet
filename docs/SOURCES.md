@@ -44,3 +44,5 @@ The owner confirmed delivery through [the official iFood store](https://www.ifoo
 ## Cordel gallery artwork update
 
 The owner supplied three images in `public/images/`: `xilografura nordestina casal.jpg`, `manifesto-1.png`, and `xilografura os violeiros.jpg`. These replace the generated SVG illustrations in the three cordel booklets. Original files, aspect ratios, lettering, and visible signatures are preserved. Paths, alternative text, and dimensions are configured in `src/config/cordel.json`.
+
+The couple and musicians images now have AI-assisted background-extraction derivatives, documented in IMAGE-PROMPT.md. Original uploaded JPEGs are preserved. The gallery uses the transparent versions with a configurable multiply blend over the paper.

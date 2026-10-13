@@ -61,3 +61,5 @@ Push the reviewed changes to GitHub and deploy the new production build. GitHub 
 Use `npm run check` to run the complete sequence, or `npm run test:e2e` for browser tests only. Existing product IDs are stored explicitly in `catalog.json`: reordering products does not change cart associations. Add a unique ID for each new product, keep `sourcePage` within the configured menu pages, and use an existing `categoryId`. Invalid catalog references and cordel definitions also fail Vite startup/build.
 
 Cordel booklets use the supplied raster artwork. Each entry requires an `image` object with `src`, descriptive `alt`, and original `width`/`height`. Images use `object-fit: contain` to preserve the entire artwork. The `kind` field selects the existing booklet paper style.
+
+For each cordel image, `maxWidth` sets its width as a percentage of the illustration area (20 to 100). `blend` accepts `normal` or `multiply`; multiply blends white interior details into the booklet paper. Transparent PNGs preserve the cutout outside the artwork. These settings work locally; deployment is deferred until requested.
