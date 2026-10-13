@@ -1,7 +1,7 @@
 import { assetPath } from "../config/paths";
 import { site, whatsappLink } from "../config/site";
 import { copy } from "../config/content";
-﻿import {
+import {
   ArrowUpRight,
   ArrowDown,
   MessageCircle,
@@ -37,8 +37,11 @@ export function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45 }}
           >
-            <div className="eyebrow">
-              {copy.Home.brandName}<span aria-hidden="true">{copy.Home.heroSymbol}</span> {copy.Home.tagline}</div>
+            <div className="eyebrow hero-brandline">
+              <span className="hero-brandline-name">{copy.Home.brandName.trim()}</span>
+              <span className="hero-brandline-symbol" aria-hidden="true">{copy.Home.heroSymbol}</span>
+              <span className="hero-brandline-tagline">{copy.Home.tagline.trim()}</span>
+            </div>
             <h1>
               {copy.Home.titleLineOne}<br />
               {copy.Home.titleLineTwo}<br />

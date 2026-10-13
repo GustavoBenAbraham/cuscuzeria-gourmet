@@ -1434,3 +1434,30 @@ footer {
 @media (max-width: 640px) { .cordel-print { height: 260px; flex-basis: 260px; } }
 
 .cordel-heading > p, .cordel-verse { color: var(--color-cordelInk); }
+
+/* Keep brand text separate from the decorative line used by other eyebrows. */
+.nordeste-hero .hero-brandline {
+  font-size: 10px;
+  line-height: 1.6;
+  letter-spacing: .08em;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+.nordeste-hero .hero-brandline > span {
+  width: auto;
+  height: auto;
+  background: none;
+  white-space: nowrap;
+}
+.nordeste-hero .hero-brandline-symbol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 12px;
+  font-size: 12px;
+  line-height: 1;
+}
+@media (max-width: 359px) {
+  .nordeste-hero .hero-brandline { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .nordeste-hero .hero-brandline-symbol { display: none; }
+}

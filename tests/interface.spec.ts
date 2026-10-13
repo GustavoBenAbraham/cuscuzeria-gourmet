@@ -184,3 +184,26 @@ test("storage failure keeps the in-memory cart usable and explains the limitatio
  await page.locator('.cart-row .stepper button').last().click();
  await expect(page.locator('.cart-row .stepper span')).toHaveText('2');
 });
+
+
+test('hero brand line remains readable without clipped decoration on narrow screens', async ({page}) => {
+ for(const width of [320,360,390,430,768]) {
+  await page.setViewportSize({width,height:900});
+  await page.goto('/');
+  const line=page.locator('.hero-brandline');
+  await expect(line).toHaveCSS('font-size','10px');
+  for(const selector of ['.hero-brandline-name','.hero-brandline-tagline']) {
+   const label=line.locator(selector);
+   await expect(label).toBeVisible();
+   await expect(label).toHaveCSS('background-color','rgba(0, 0, 0, 0)');
+   const rect=await label.boundingBox();
+   expect(rect!.height).toBeGreaterThanOrEqual(16);
+   expect(rect!.x).toBeGreaterThanOrEqual(0);
+   expect(rect!.x+rect!.width).toBeLessThanOrEqual(width);
+  }
+  const symbol=line.locator('.hero-brandline-symbol');
+  if(width<360)await expect(symbol).toBeHidden();
+  else {await expect(symbol).toHaveCSS('height','12px');await expect(symbol).toHaveCSS('background-color','rgba(0, 0, 0, 0)');}
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ }
+});
