@@ -59,3 +59,5 @@ Schema validation rejects malformed URLs, duplicate routes/navigation IDs, inval
 Push the reviewed changes to GitHub and deploy the new production build. GitHub source updates alone do not update a hosted site. See [DEPLOYMENT.md](DEPLOYMENT.md).
 
 Use `npm run check` to run the complete sequence, or `npm run test:e2e` for browser tests only. Existing product IDs are stored explicitly in `catalog.json`: reordering products does not change cart associations. Add a unique ID for each new product, keep `sourcePage` within the configured menu pages, and use an existing `categoryId`. Invalid catalog references and cordel definitions also fail Vite startup/build.
+
+Cordel booklets use the supplied raster artwork. Each entry requires an `image` object with `src`, descriptive `alt`, and original `width`/`height`. Images use `object-fit: contain` to preserve the entire artwork. The `kind` field selects the existing booklet paper style.

@@ -40,3 +40,7 @@ The owner confirmed delivery through [the official iFood store](https://www.ifoo
 - Obtain suitable-resolution food photographs. The original logo is already in use; a larger file is optional for future print applications.
 - Obtain the restaurant's actual history and approval of the copy and adapted identity.
 - Confirm fine details using a high-resolution PDF before commercial use because the source thumbnails have limited resolution. All displayed prices were legible during visual verification.
+
+## Cordel gallery artwork update
+
+The owner supplied three images in `public/images/`: `xilografura nordestina casal.jpg`, `manifesto-1.png`, and `xilografura os violeiros.jpg`. These replace the generated SVG illustrations in the three cordel booklets. Original files, aspect ratios, lettering, and visible signatures are preserved. Paths, alternative text, and dimensions are configured in `src/config/cordel.json`.

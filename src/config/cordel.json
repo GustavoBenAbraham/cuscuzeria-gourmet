@@ -10,7 +10,13 @@
       "a cozinha ganha um tom.",
       "E o cuscuz chega à mesa",
       "feito verso de um baião."
-    ]
+    ],
+    "image": {
+      "src": "/images/xilografura%20nordestina%20casal.jpg",
+      "alt": "Xilogravura de um casal nordestino de mãos dadas",
+      "width": 538,
+      "height": 502
+    }
   },
   {
     "title": "Um sertão de poesia",
@@ -23,7 +29,13 @@
       "tem história no cordel.",
       "Cada folha abre uma porta,",
       "cada rima, um carrossel."
-    ]
+    ],
+    "image": {
+      "src": "/images/manifesto-1.png",
+      "alt": "Ilustração Manifesto do Cordel, com personagem, bandeira e cacto",
+      "width": 419,
+      "height": 462
+    }
   },
   {
     "title": "Sabor que vira cantiga",
@@ -36,6 +48,12 @@
       "vai passando o bom sabor.",
       "Nossa mesa fica cheia",
       "de conversa e de calor."
-    ]
+    ],
+    "image": {
+      "src": "/images/xilografura%20os%20violeiros.jpg",
+      "alt": "Xilogravura Os Violeiros, com dois músicos tocando viola",
+      "width": 783,
+      "height": 787
+    }
   }
 ]

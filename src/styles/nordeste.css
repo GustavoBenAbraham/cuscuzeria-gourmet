@@ -1417,3 +1417,8 @@ footer {
   .cordel-verse { font-size: 16px; }
   .cordel-colophon { line-height: 1.6; }
 }
+
+/* Preserve the complete supplied artwork, including signatures. */
+.cordel-print { display: block; height: 270px; padding: 8px 0 16px; }
+.cordel-print img { display: block; width: 100%; height: 100%; object-fit: contain; }
+@media (min-width: 641px) and (max-width: 900px) { .cordel-print { height: 170px; } }

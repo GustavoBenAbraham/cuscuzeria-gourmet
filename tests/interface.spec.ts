@@ -144,7 +144,13 @@ test("configured routes, metadata, theme, and cordel are rendered", async ({page
  expect(structuredData.telephone).toBe('+'+site.restaurant.phone);
  await expect(page.locator('link[rel="icon"][type="image/svg+xml"]')).toHaveAttribute('href',site.branding.favicon);
  await expect(page.locator('.cordel-booklet')).toHaveCount(site.features.cordel ? poems.length : 0);
- if(site.features.cordel) for(const poem of poems)await expect(page.getByRole('heading',{name:poem.title,exact:true})).toBeVisible();
+ if(site.features.cordel) for(const poem of poems) {
+  const artwork=page.getByRole('img',{name:poem.image.alt,exact:true});
+  await artwork.scrollIntoViewIfNeeded();
+  await expect(artwork).toHaveAttribute('src',poem.image.src);
+  await expect.poll(()=>artwork.evaluate((img: HTMLImageElement)=>img.complete && img.naturalWidth>0)).toBe(true);
+  await expect(artwork).toHaveCSS('object-fit','contain');
+ }
  const button=page.locator('.header-actions .ifood-button');
  await button.hover();
  const hex=theme.colors.ifoodRed.slice(1);

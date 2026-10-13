@@ -19,7 +19,7 @@ export const siteSchema = z.object({
  routes:z.object({home:z.literal('/'),menu:route,cart:route,story:route,contact:route}).refine(v=>new Set(Object.values(v)).size===Object.values(v).length, 'Routes must be unique'),
  sections:z.object({menuId:z.string().regex(/^[a-z][a-z0-9-]*$/),mainId:z.string().regex(/^[a-z][a-z0-9-]*$/)})
 }).refine(v=>new Set(v.navigation.map(n=>n.id)).size===v.navigation.length,'Navigation IDs must be unique');
-export const cordelSchema = z.array(z.object({title:text,number:text,kind:z.enum(['corn','landscape','music']),lines:z.array(text).min(1)})).refine(v=>new Set(v.map(p=>p.number)).size===v.length,'Cordel edition numbers must be unique');
+export const cordelSchema = z.array(z.object({title:text,number:text,kind:z.enum(['corn','landscape','music']),image:z.object({src:asset,alt:text,width:positive,height:positive}),lines:z.array(text).min(1)})).refine(v=>new Set(v.map(p=>p.number)).size===v.length,'Cordel edition numbers must be unique');
 
 export const themeSchema = z.object({
  colors: z.record(z.string().regex(/^[a-zA-Z][a-zA-Z0-9]*$/), z.string().regex(/^#[0-9a-f]{3,8}$/i)),
