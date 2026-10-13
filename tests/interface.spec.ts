@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { restaurant } from "../src/data/restaurant";
-test("cardápio na home, logo original e quatro páginas de referência", async ({page}) => {
+test("home menu, original logo, and four reference pages", async ({page}) => {
   await page.goto('/');
   const logo = page.locator('header .original-logo');
   await expect(logo).toHaveAttribute('src', '/images/logo%20cuscuzeira%20gourmet.jpg');
@@ -17,7 +17,7 @@ test("cardápio na home, logo original e quatro páginas de referência", async 
   await expect(page.locator('.original-menu-grid img')).toHaveCount(4);
   await expect(page.getByRole('link', {name:'Abrir página 1: Cuscuzes salgados e doces'})).toBeVisible();
 });
-test("layout sem overflow em mobile, tablet e desktop", async ({ page }) => {
+test("layout without overflow on mobile, tablet, and desktop", async ({ page }) => {
   for (const width of [360, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/");
@@ -41,7 +41,7 @@ test("layout sem overflow em mobile, tablet e desktop", async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 800 });
   await page.screenshot({ path: "docs/preview-mobile.png", fullPage: true });
 });
-test("busca, carrinho persistido, validação e checkout WhatsApp", async ({
+test("search, cart persistence, validation, and WhatsApp inquiry", async ({
   page,
 }) => {
   const errors: string[] = [];
@@ -106,7 +106,7 @@ test("busca, carrinho persistido, validação e checkout WhatsApp", async ({
   await expect(page.getByText("Sua mesa ainda está vazia.")).toBeVisible();
   expect(errors).toEqual([]);
 });
-test("menu mobile e busca sem resultados", async ({ page }) => {
+test("mobile navigation and empty search results", async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 800 });
   await page.goto("/");
   await page.getByRole("button", { name: "Abrir menu" }).click();

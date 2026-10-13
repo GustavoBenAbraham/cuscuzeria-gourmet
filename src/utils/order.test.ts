@@ -1,15 +1,15 @@
 import { describe, it, expect } from "vitest";
 import { products, categories } from "../data/catalog";
 import { sanitizeCart, subtotal, whatsappUrl } from "./order";
-describe("carrinho", () => {
-  it("calcula quantidades e centavos sem arredondamento indevido", () => {
+describe("cart", () => {
+  it("calculates quantities and cents without incorrect rounding", () => {
     const p = products.find((p) => p.name === "Picolé Cremoso")!;
     expect(
       subtotal([{ productId: p.id, quantity: 3, note: "" }], products),
     ).toBe(10.5);
     expect(subtotal([], products)).toBe(0);
   });
-  it("descarta dados corrompidos, duplicatas e itens desconhecidos", () => {
+  it("discards corrupted data, duplicates, and unknown items", () => {
     const id = products[0].id;
     expect(
       sanitizeCart(
@@ -25,7 +25,7 @@ describe("carrinho", () => {
     ).toEqual([{ productId: id, quantity: 2, note: "a".repeat(300) }]);
     expect(sanitizeCart(null, products)).toEqual([]);
   });
-  it("não calcula produtos indisponíveis ou pendentes", () => {
+  it("excludes unavailable and pending products from totals", () => {
     const p = { ...products[0], available: false };
     expect(subtotal([{ productId: p.id, quantity: 2, note: "" }], [p])).toBe(0);
     expect(
@@ -35,13 +35,13 @@ describe("carrinho", () => {
       ),
     ).toEqual([]);
   });
-  it("rejeita quantidade acima do limite", () =>
+  it("rejects quantities above the limit", () =>
     expect(
       sanitizeCart([{ productId: products[0].id, quantity: 100 }], products),
     ).toEqual([]));
 });
 describe("WhatsApp", () => {
-  it("codifica nome, observações, subtotal e número oficial", () => {
+  it("encodes customer name, notes, subtotal, and official number", () => {
     const url = whatsappUrl({
       name: "João & Maria",
       note: "Sem cebola\nObrigado!",
@@ -64,7 +64,7 @@ describe("WhatsApp", () => {
     expect(message).toContain("confirmar a disponibilidade");
     expect(url).not.toContain("João");
   });
-  it("rejeita pedido vazio e modalidade não confirmada", () => {
+  it("rejects empty orders and unconfirmed fulfillment modes", () => {
     expect(() => whatsappUrl({ name: "Ana", note: "", items: [] })).toThrow();
     expect(() =>
       whatsappUrl({
@@ -75,7 +75,7 @@ describe("WhatsApp", () => {
       }),
     ).toThrow();
   });
-  it("rejeita preço e quantidade inválidos", () => {
+  it("rejects invalid prices and quantities", () => {
     expect(() =>
       whatsappUrl({
         name: "Ana",
@@ -92,8 +92,8 @@ describe("WhatsApp", () => {
     ).toThrow();
   });
 });
-describe("catálogo", () => {
-  it("mantém origem e associação de preços conferidos nas páginas", () => {
+describe("catalog", () => {
+  it("preserves verified source references and price associations", () => {
     expect(products).toHaveLength(64);
     expect(new Set(products.map((p) => p.id)).size).toBe(products.length);
     expect(

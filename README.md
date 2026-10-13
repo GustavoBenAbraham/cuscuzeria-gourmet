@@ -1,70 +1,84 @@
 # Cuscuzeria Gourmet
 
-Aplicação demonstrativa React + TypeScript + Vite, com Tailwind CSS, React Router, Lucide, Motion, React Hook Form e Zod. Catálogo de 64 opções conferidas nas quatro páginas do cardápio oficial. Sem backend, pagamentos ou autenticação.
+Responsive restaurant website and digital menu inspired by northeastern Brazilian culture. Built with React, TypeScript, Vite, Tailwind CSS, React Router, Lucide, Motion, React Hook Form, and Zod.
 
-## Executar
+The customer interface is intentionally in Brazilian Portuguese. Repository documentation, code comments, and test descriptions use English.
 
-Requer Node.js 22.12+ (validado com 24.19) e npm.
+## Getting started
+
+Requires Node.js 22.12 or later (validated with 24.19) and npm.
 
 ```sh
-npm install
+npm ci
 npm run dev
-npm test
-npm run build
-npm run preview
 ```
 
-No PowerShell, use `npm.cmd` caso a política de execução bloqueie `npm.ps1`. Abra o endereço impresso pelo Vite, normalmente http://127.0.0.1:5173. O build fica em `dist/`.
+Open the URL printed by Vite, usually http://127.0.0.1:5173. On PowerShell, use `npm.cmd` if the execution policy blocks `npm.ps1`.
 
-## Estrutura
+## Available commands
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the local development server |
+| `npm test` | Run unit tests |
+| `npx playwright test` | Run browser tests using installed Chrome |
+| `npm run build` | Check TypeScript and build into `dist/` |
+| `npm run preview` | Preview the production build |
+
+## Features
+
+- 64 menu options checked against the four original menu pages.
+- Accent-insensitive search, category filters, featured items, and sorting.
+- Persistent cart with quantities from 1 to 99, item notes, removal, and totals calculated in cents. Invalid, duplicate, and unavailable entries are sanitized on restoration.
+- Validated customer name and notes. Form data stays in memory; cart items and notes are stored in the browser.
+- Delivery through the official iFood store. Customers select items and complete checkout there; the local cart is not transferred automatically. Prices, availability, delivery fees, coverage, and estimates are determined by iFood.
+- WhatsApp inquiries about selected items. Customers confirm sending in WhatsApp; the website does not assume receipt or automatically clear the cart.
+- Semantic HTML, keyboard focus, skip navigation, labeled forms, announced errors, reduced-motion support, basic metadata, and Restaurant JSON-LD based on documented information.
+- Original restaurant logo in the header, footer, favicon, and home-screen icon.
+
+This is a demonstration frontend without a backend, payments, or authentication. `confirmedOrderModes` covers only direct WhatsApp fulfillment and remains empty. Pickup is unconfirmed; iFood delivery does not enable address collection or direct delivery checkout through WhatsApp. The local selection does not reserve inventory or complete a sale.
+
+## Project structure
 
 ```text
 src/
-  components/layout/   cabeçalho, menu mobile e rodapé
-  components/ui/       arte ilustrativa SVG
-  components/products/ cartões e controles de quantidade
-  data/                catálogo e informações comerciais editáveis
-  hooks/               estado e persistência do carrinho
-  pages/               início, cardápio, pedido, história e contato
-  services/            contrato assíncrono do catálogo
-  types/               Product, Category, CartItem, RestaurantInfo, Order, OrderItem
-  utils/               cálculos, sanitização e mensagem WhatsApp
-  styles/              estilos responsivos e Tailwind
-public/                favicon
-docs/sources/          quatro páginas usadas para conferência
-docs/SOURCES.md        auditoria das fontes e pendências
-tests/                 verificações de navegador
+  components/layout/   Header, mobile navigation, and footer
+  components/ui/       Shared interface elements and SVG artwork
+  components/products/ Menu cards and quantity controls
+  data/                Editable menu and restaurant information
+  hooks/               Cart state and persistence
+  pages/               Home, menu, order, story, and contact pages
+  services/            Asynchronous catalog interface
+  types/               Shared domain types
+  utils/               Calculations, sanitization, and WhatsApp messages
+  styles/              Responsive styles and Tailwind
+public/                Static assets, images, and icons
+docs/                  Sources, image provenance, deployment, and proposal
+tests/                 Browser tests
 ```
 
-## Comportamento
+## Maintaining the menu and images
 
-- Pesquisa sem distinção de acentos, categorias geradas a partir dos produtos, filtro de destaques e ordenação.
-- Quantidades de 1 a 99, remoção, notas por item, subtotal calculado em centavos e carrinho persistido. Dados inválidos ou produtos indisponíveis são descartados na recuperação.
-- Nome e observações gerais validados. Dados do formulário permanecem em memória; somente itens e notas do carrinho são salvos no navegador.
-- A entrega é feita pelo iFood, no link oficial informado pelo usuário e configurado em `deliveryUrl`. Os botões abrem a loja; o cliente seleciona os itens e finaliza o pedido por lá. O carrinho local não é transferido automaticamente. Preços, disponibilidade, frete e prazo de delivery são os exibidos no iFood.
-- O WhatsApp permite consultar o restaurante sobre os itens selecionados. O usuário prepara a mensagem e confirma o envio no WhatsApp; o site não presume recebimento nem limpa o carrinho automaticamente.
-- `confirmedOrderModes` refere-se somente a modalidades atendidas diretamente pelo WhatsApp e permanece vazio. A entrega pelo iFood não habilita coleta de endereço ou fechamento de delivery pelo WhatsApp. Retirada ainda não foi confirmada.
-- Sem frete, pagamento, prazo ou avaliação inventados. Preços representam a fonte consultada, não uma confirmação de vigência comercial.
-- HTML semântico, foco por teclado, link para pular navegação, rótulos de formulário, erros anunciados, movimento reduzido, metadados básicos e Restaurant JSON-LD apenas com dados documentados.
+Edit `src/data/catalog.ts`. Use `verificationStatus: 'pending'`, `price: null`, or `available: false` for unconfirmed items; ordering will be disabled. Add authorized images under `public/images/` and set `image` to their public path. Product images load lazily and retain their proportions. Items without photographs use a text-based presentation.
 
-## Atualizar catálogo e imagens
+The AI-generated hero image at `public/images/cuscuz-ilustrativo.jpg` is visibly labeled as illustrative. See [image provenance](docs/IMAGE-PROMPT.md). The original 150 ? 150 logo is preserved at `public/images/logo cuscuzeira gourmet.jpg` and rendered by `BrandArtwork`. Existing asset names and Portuguese customer-facing routes are retained for compatibility.
 
-Edite `src/data/catalog.ts`. Use `verificationStatus: 'pending'`, `price: null` ou `available: false` quando um item não estiver confirmado; seu botão de pedido será desabilitado. Coloque imagens autorizadas em `public/images/` e use `/images/arquivo.webp` no campo `image`. O componente usa `loading="lazy"` e preserva proporções. O catálogo usa uma apresentação textual quando não há fotografia. A abertura usa uma imagem gerada por IA em `public/images/cuscuz-ilustrativo.jpg`, identificada como ilustrativa. Prompt e método estão em `docs/IMAGE-PROMPT.md`.
+Regional styling lives in `src/styles/nordeste.css`; `SertaoArt` provides original SVG artwork. Fortal Cuscuz informed the visual organization; no competitor photographs or commercial content were reused.
 
-A logo original enviada pelo usuário está em `public/images/logo cuscuzeira gourmet.jpg`, usada pelo componente `BrandArtwork`. O arquivo tem 150 × 150 px e é exibido sem distorção. A direção visual nordestina está em `src/styles/nordeste.css`, com composição do sertão em `SertaoArt`. A referência Fortal Cuscuz foi usada para orientar a organização visual; nenhum conteúdo comercial ou fotografia de outro estabelecimento foi incorporado.
+The home page initially shows savory cuscuz, while `/cardapio` shows all 64 options. Both support search, categories, and quantity controls. An expandable section displays the four original pages in `public/images/cardapio/`.
 
-O cardápio aparece na home (categoria cuscuzes selecionada inicialmente) e em `/cardapio` (todas as 64 opções). Busca, categorias e controles funcionam nas duas telas. A seção expansível “Ver cardápio original” mostra as quatro páginas armazenadas em `public/images/cardapio/`.
+`catalogService.getCatalog()` is the replacement point for a future REST API. Preserve types and stable IDs when integrating a backend such as Spring Boot/PostgreSQL.
 
-`catalogService.getCatalog()` é o ponto de substituição para API REST. Preserve os tipos e IDs estáveis ao migrar para Spring Boot/PostgreSQL. A seleção local não representa reserva, estoque ou venda concluída.
+## Validation
 
-## Verificação
+Unit tests cover currency calculations, corrupted state, duplicates, quantity limits, unavailable and pending products, WhatsApp encoding, and rejection of unconfirmed fulfillment modes. Catalog checks cover IDs, categories, item counts, source references, and critical price associations.
 
-`npm test` cobre cálculo monetário, recuperação de estado inválido, duplicatas, quantidades, itens pendentes e indisponíveis, número e codificação WhatsApp, conteúdo da mensagem e rejeição de modalidade não confirmada. O teste de catálogo verifica IDs, categorias, contagem e associações críticas de preços.
+Browser tests cover 360, 768, and 1440 pixel viewports, navigation, search, persistence, quantities, and the inquiry flow. They start a separate Vite server and do not send messages to the restaurant.
 
-`npx playwright test` executa os testes de interface em Chrome instalado, com servidor Vite iniciado pelo teste. Verifica telas de 360, 768 e 1440 px, navegação, busca, persistência, quantidade e checkout. Não envia mensagens ao restaurante.
+## Deployment
 
-## Publicar
+Serve `dist/` with an SPA fallback to `index.html` for React Router. A Netlify example is provided in `public/_redirects`; Nginx can use `try_files $uri $uri/ /index.html;`. The existing `.openai/hosting.json` identifies the private Sites demonstration deployment.
 
-Hospede `dist/` em uma plataforma estática com fallback de URLs para `index.html`, necessário para React Router. Um exemplo Netlify está em `public/_redirects`. Em Nginx, use `try_files $uri $uri/ /index.html;`. Configure HTTPS e domínio; depois acrescente URL canônica e Open Graph com o domínio e uma imagem aprovada. O projeto possui manifesto Sites em `.openai/hosting.json` para publicação privada de demonstração.
+See the [deployment guide](docs/DEPLOYMENT.md), [source audit](docs/SOURCES.md), and [commercial proposal](docs/COMMERCIAL_PROPOSAL.md).
 
-Antes de uso comercial, valide todas as pendências em [docs/SOURCES.md](docs/SOURCES.md). A autorização de uso de fotos e logotipo já foi confirmada pelo usuário e a logo original está integrada. Para evolução: incorporar fotografias reais dos pratos em boa resolução, validar disponibilidade via API e criar painel de catálogo. As entregas seguem pelo iFood. Fontes Google são carregadas externamente, com fallback local para serif/sans-serif; para maior privacidade e desempenho, hospede os arquivos de fontes após obter as licenças.
+Before commercial launch, verify the outstanding business information in the source audit. Logo and photo authorization has already been confirmed. Future improvements include higher-resolution food photographs, live availability, and catalog administration. Google Fonts currently load externally with local font fallbacks; self-hosting requires the appropriate font licenses.
