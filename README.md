@@ -86,3 +86,7 @@ Before commercial launch, verify the outstanding business information in the sou
 ## Configuration
 
 Business details, copy, assets, routes, cordel booklets, theme, and cart limits are centralized under `src/config/`. See the [configuration guide](docs/CONFIGURATION.md) for editable fields, placeholders, validation, and publishing instructions.
+
+## GitHub Pages
+
+The website is published at https://gustavobenabraham.github.io/cuscuzeria-gourmet-site/. Application source remains private; a separate public repository stores only the built site. Use `npm run build:pages` and `npm run test:pages` to validate the Pages build. See [deployment instructions](docs/DEPLOYMENT.md) before publishing.

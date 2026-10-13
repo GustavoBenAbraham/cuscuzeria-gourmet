@@ -1,3 +1,4 @@
+import { assetPath } from "../config/paths";
 import { site, whatsappLink } from "../config/site";
 import { copy } from "../config/content";
 ﻿import {
@@ -22,7 +23,7 @@ export function Home() {
       <section className="nordeste-hero">
         <img
           className="nordeste-hero-photo"
-          src={site.branding.hero}
+          src={assetPath(site.branding.hero)}
           width={site.branding.heroWidth}
           height={site.branding.heroHeight}
           fetchPriority="high"

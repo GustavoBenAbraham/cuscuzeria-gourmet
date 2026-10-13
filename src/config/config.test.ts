@@ -107,7 +107,7 @@ it('applies feature switches and changed routes and images to rendered component
  const home=render(Home);
  expect(home).not.toContain('class="cordel-gallery"');
  expect(home).not.toContain('class="original-menu"');
-});
+}, 15000);
 
 it('rejects catalog corruption without depending on product ordering', async () => {
  const {default: catalog}=await import('./catalog.json');

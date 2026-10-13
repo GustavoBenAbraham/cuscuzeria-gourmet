@@ -1,3 +1,4 @@
+import { assetPath } from "../../config/paths";
 import { site } from "../../config/site";
 import { copy, formatText } from "../../config/content";
 import { ArrowUpRight, BookOpen } from "lucide-react";
@@ -22,13 +23,13 @@ export function OriginalMenu() {
           {pages.map(({ title: name, image, width, height }, index) => (
             <figure key={name}>
               <a
-                href={image}
+                href={assetPath(image)}
                 target="_blank"
                 rel="noreferrer"
                 aria-label={formatText(copy.OriginalMenu.openPageLabel, {value0: index + 1, value1: name})}
               >
                 <img
-                  src={image}
+                  src={assetPath(image)}
                   width={width}
                   height={height}
                   loading="lazy"

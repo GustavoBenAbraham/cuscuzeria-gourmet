@@ -1,3 +1,4 @@
+import { assetPath } from "../../config/paths";
 import { site } from "../../config/site";
 import { copy, formatText } from "../../config/content";
 import { Plus, Minus } from "lucide-react";
@@ -21,7 +22,7 @@ export function ProductCard({
       {(!compact || p.image) && (
         <div className="product-art">
           {p.image ? (
-            <img src={p.image} alt={p.name} loading="lazy" />
+            <img src={assetPath(p.image)} alt={p.name} loading="lazy" />
           ) : p.categoryId.includes("cuscuz") ? (
             <FoodArt variant={p.categoryId} />
           ) : (

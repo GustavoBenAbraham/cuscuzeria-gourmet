@@ -23,7 +23,7 @@ function NavigationEffects() {
     window.scrollTo(0, 0);
     const titles: Record<string, string> = Object.fromEntries(site.navigation.map(item => [site.routes[item.id as keyof typeof site.routes], item.title]));
     titles[site.routes.cart] = site.pages.cart.title;
-    document.title = `${titles[pathname] || site.pages.notFoundTitle} | ${site.restaurant.name}`;
+    document.title = `${titles[pathname.replace(/\/$/, "") || "/"] || site.pages.notFoundTitle} | ${site.restaurant.name}`;
     document.querySelector("main")?.setAttribute("tabindex", "-1");
     document.querySelector("main")?.focus({ preventScroll: true });
   }, [pathname]);
@@ -52,7 +52,7 @@ class ErrorBoundary extends React.Component<
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ErrorBoundary>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <CartProvider>
           <NavigationEffects />
           <Routes>

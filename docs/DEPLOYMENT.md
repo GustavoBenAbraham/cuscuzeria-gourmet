@@ -1,5 +1,44 @@
 # Deployment Guide
 
+## GitHub Pages (primary hosting)
+
+- Public website: https://gustavobenabraham.github.io/cuscuzeria-gourmet-site/
+- Private application source: https://github.com/GustavoBenAbraham/cuscuzeria-gourmet
+- Public deployment files: https://github.com/GustavoBenAbraham/cuscuzeria-gourmet-site
+
+The source repository stays private. The separate public repository contains the compiled website and its public assets; repository documentation and source history are not copied. GitHub Pages publishes its main branch from the repository root.
+
+### Publish an update
+
+After reviewing local changes, use an authenticated Git installation with write access to the deployment repository:
+
+```sh
+npm test
+npm run build:pages
+npm run test:pages
+node scripts/publish-pages.mjs
+```
+
+Alternatively, `npm run publish:pages` builds and uploads the site. GitHub then runs its Pages deployment. This command publishes externally; local adjustments need only `npm run dev` or the normal build/preview commands.
+
+The deployment helper maintains a separate checkout in the ignored `.openai/pages-publish/` directory, checks the destination remote, and copies only `dist-pages/`. Commit and push application changes separately to the private source repository.
+
+### Local previews
+
+`npm run build` and `npm run preview` keep the existing local site at http://127.0.0.1:4173/.
+
+To verify the production Pages paths, run `npm run build:pages` followed by `npm run preview:pages`, then open http://127.0.0.1:4180/cuscuzeria-gourmet-site/.
+
+### Routing and assets
+
+Pages builds use `/cuscuzeria-gourmet-site/` as the base path. Asset URLs, icons, and the router share this base. The build emits an index.html for each configured route, so direct links and reloads work without server-side SPA rewrites. A 404.html handles unknown routes. Local development retains its root base path.
+
+If adopting a custom domain, configure the domain in the deployment repository's Pages settings, adjust the Pages base path, and update the preview tests accordingly. Follow the exact DNS values supplied by GitHub.
+
+## Previous hosting and general launch guidance
+
+The prior Sites deployment is retained as a separate demonstration. This migration does not publish updates to Sites or delete that deployment.
+
 ## Current repository
 
 The project is hosted in the private GitHub repository [GustavoBenAbraham/cuscuzeria-gourmet](https://github.com/GustavoBenAbraham/cuscuzeria-gourmet), on the `main` branch. The existing private Sites deployment is configured in `.openai/hosting.json`.

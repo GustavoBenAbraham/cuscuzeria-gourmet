@@ -4,3 +4,6 @@ dist/
 .openai/*.zip
 .openai/*.tar.gz
 test-results/
+
+dist-pages/
+.openai/pages-publish/
