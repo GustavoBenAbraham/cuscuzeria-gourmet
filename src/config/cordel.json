@@ -1,0 +1,41 @@
+[
+  {
+    "title": "Do milho nasce o encontro",
+    "number": "01",
+    "kind": "corn",
+    "lines": [
+      "Quando o milho vira massa,",
+      "vai subindo um cheiro bom.",
+      "A conversa ganha espaço,",
+      "a cozinha ganha um tom.",
+      "E o cuscuz chega à mesa",
+      "feito verso de um baião."
+    ]
+  },
+  {
+    "title": "Um sertão de poesia",
+    "number": "02",
+    "kind": "landscape",
+    "lines": [
+      "Tem o sol por testemunha,",
+      "tem o verso no papel.",
+      "Tem desenho feito em traço,",
+      "tem história no cordel.",
+      "Cada folha abre uma porta,",
+      "cada rima, um carrossel."
+    ]
+  },
+  {
+    "title": "Sabor que vira cantiga",
+    "number": "03",
+    "kind": "music",
+    "lines": [
+      "A sanfona puxa o fole,",
+      "vem chegando o cantador.",
+      "Entre um verso e uma prosa,",
+      "vai passando o bom sabor.",
+      "Nossa mesa fica cheia",
+      "de conversa e de calor."
+    ]
+  }
+]

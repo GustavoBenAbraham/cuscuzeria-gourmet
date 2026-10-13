@@ -1,3 +1,5 @@
+import { site } from "../config/site";
+import { copy, formatText } from "../config/content";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Minus, Plus, Trash2, ShoppingBag, ArrowUpRight } from "lucide-react";
@@ -14,24 +16,24 @@ const schema = z
     name: z
       .string()
       .trim()
-      .min(2, "Informe seu nome (pelo menos 2 caracteres).")
-      .max(80, "Use até 80 caracteres."),
-    note: z.string().max(500, "Use até 500 caracteres."),
+      .min(site.cart.nameMinLength, copy.Cart.nameTooShort)
+      .max(site.cart.nameMaxLength, copy.Cart.nameTooLong),
+    note: z.string().max(site.cart.orderNoteMaxLength, copy.Cart.noteTooLong),
     mode: z.enum(["", "retirada", "entrega"]),
-    address: z.string().max(300, "Use até 300 caracteres."),
+    address: z.string().max(site.cart.addressMaxLength, copy.Cart.addressTooLong),
   })
   .superRefine((d, ctx) => {
     if (d.mode && !restaurant.confirmedOrderModes.includes(d.mode))
       ctx.addIssue({
         code: "custom",
         path: ["mode"],
-        message: "Modalidade ainda não confirmada.",
+        message: copy.Cart.modeUnconfirmed,
       });
-    if (d.mode === "entrega" && d.address.trim().length < 8)
+    if (d.mode === "entrega" && d.address.trim().length < site.cart.addressMinLength)
       ctx.addIssue({
         code: "custom",
         path: ["address"],
-        message: "Informe o endereço completo.",
+        message: copy.Cart.addressRequired,
       });
   });
 type Fields = z.infer<typeof schema>;
@@ -68,18 +70,18 @@ export function Cart() {
   }
   return (
     <section className="wrap section">
-      <div className="eyebrow">MAIS PERTO DO SEU PRÓXIMO SABOR</div>
+      <div className="eyebrow">{copy.Cart.eyebrow}</div>
       <h1>
-        Seu <em>pedido.</em>
+        {copy.Cart.title}<em>{copy.Cart.titleAccent}</em>
       </h1>
       <DeliveryCallout cart={cart.items.length > 0} />
       {!cart.items.length ? (
         <div className="empty">
           <ShoppingBag size={45} />
-          <h2>Sua mesa ainda está vazia.</h2>
-          <p>Explore o cardápio e adicione seus favoritos.</p>
-          <Link to="/cardapio" className="button">
-            Explorar cardápio <ArrowUpRight size={18} />
+          <h2>{copy.Cart.emptyTitle}</h2>
+          <p>{copy.Cart.emptyDescription}</p>
+          <Link to={site.routes.menu} className="button">
+            {copy.Cart.browseMenu}<ArrowUpRight size={18} />
           </Link>
         </div>
       ) : (
@@ -87,12 +89,10 @@ export function Cart() {
           <div>
             {cart.storageError && (
               <p role="alert" className="notice">
-                Seu navegador não permitiu salvar o carrinho. Os itens
-                permanecem nesta sessão.
-              </p>
+                {copy.Cart.storageError}</p>
             )}
             <div className="cart-toolbar">
-              <span>Resumo do pedido</span>
+              <span>{copy.Cart.summary}</span>
               <button
                 type="button"
                 className="text-button"
@@ -101,8 +101,7 @@ export function Cart() {
                   setUrl("");
                 }}
               >
-                Limpar carrinho
-              </button>
+                {copy.Cart.clearCart}</button>
             </div>
             <div className="cart-items">
               {cart.items.map((i) => {
@@ -112,10 +111,10 @@ export function Cart() {
                     <div className="cart-row-title">
                       <div>
                         <h2>{p.name}</h2>
-                        <span>{money(p.price!)} por unidade</span>
+                        <span>{money(p.price!)} {copy.Cart.perUnit}</span>
                       </div>
                       <button
-                        aria-label={`Remover ${p.name}`}
+                        aria-label={formatText(copy.Cart.removeItem, {value0: p.name})}
                         onClick={() => {
                           cart.quantity(p.id, 0);
                           setUrl("");
@@ -127,7 +126,7 @@ export function Cart() {
                     <div className="cart-row-bottom">
                       <div className="stepper">
                         <button
-                          aria-label={`Diminuir ${p.name}`}
+                          aria-label={formatText(copy.Cart.decreaseItem, {value0: p.name})}
                           onClick={() => {
                             cart.quantity(p.id, i.quantity - 1);
                             setUrl("");
@@ -137,8 +136,8 @@ export function Cart() {
                         </button>
                         <span>{i.quantity}</span>
                         <button
-                          disabled={i.quantity >= 99}
-                          aria-label={`Aumentar ${p.name}`}
+                          disabled={i.quantity >= site.cart.maxQuantity}
+                          aria-label={formatText(copy.Cart.increaseItem, {value0: p.name})}
                           onClick={() => {
                             cart.quantity(p.id, i.quantity + 1);
                             setUrl("");
@@ -150,11 +149,10 @@ export function Cart() {
                       <strong>{money(i.quantity * p.price!)}</strong>
                     </div>
                     <label className="item-note">
-                      Observações deste item
-                      <input
-                        maxLength={300}
+                      {copy.Cart.itemNote}<input
+                        maxLength={site.cart.itemNoteMaxLength}
                         value={i.note}
-                        placeholder="Ex.: sem cebola; escolha de recheio"
+                        placeholder={copy.Cart.itemNotePlaceholder}
                         onChange={(e) => {
                           cart.note(p.id, e.target.value);
                           setUrl("");
@@ -165,8 +163,8 @@ export function Cart() {
                 );
               })}
             </div>
-            <Link className="text-link" to="/cardapio">
-              Continuar escolhendo <ArrowUpRight size={17} />
+            <Link className="text-link" to={site.routes.menu}>
+              {copy.Cart.continueShopping}<ArrowUpRight size={17} />
             </Link>
           </div>
           <form
@@ -174,18 +172,15 @@ export function Cart() {
             onSubmit={handleSubmit(submit)}
             onChange={() => setUrl("")}
           >
-            <h2>Dúvidas sobre sua seleção?</h2>
+            <h2>{copy.Cart.inquiryTitle}</h2>
             <div className="subtotal">
-              <span>Subtotal · {cart.count} itens</span>
+              <span>{copy.Cart.subtotalLabel}{cart.count} {copy.Cart.itemCountSuffix}</span>
               <strong>{money(cart.total)}</strong>
             </div>
             <p className="form-hint">
-              Valores de referência do cardápio. O total do delivery é calculado
-              no iFood.
-            </p>
+              {copy.Cart.priceNotice}</p>
             <label>
-              Seu nome
-              <input
+              {copy.Cart.nameLabel}<input
                 autoComplete="given-name"
                 {...register("name")}
                 aria-invalid={!!errors.name}
@@ -200,20 +195,18 @@ export function Cart() {
             {restaurant.confirmedOrderModes.length > 0 ? (
               <>
                 <label>
-                  Tipo de pedido
-                  <select {...register("mode")}>
-                    <option value="">A combinar</option>
+                  {copy.Cart.modeLabel}<select {...register("mode")}>
+                    <option value="">{copy.Cart.arrangeMode}</option>
                     {restaurant.confirmedOrderModes.map((mode) => (
                       <option key={mode} value={mode}>
-                        {mode === "entrega" ? "Entrega" : "Retirada"}
+                        {mode === "entrega" ? copy.Cart.deliveryMode : copy.Cart.pickupMode}
                       </option>
                     ))}
                   </select>
                 </label>
                 {watch("mode") === "entrega" && (
                   <label>
-                    Endereço
-                    <input
+                    {copy.Cart.addressLabel}<input
                       autoComplete="street-address"
                       {...register("address")}
                     />
@@ -222,9 +215,7 @@ export function Cart() {
               </>
             ) : (
               <p className="notice">
-                Use o WhatsApp para consultar o restaurante sobre estes itens.
-                Para entrega, faça seu pedido no iFood.
-              </p>
+                {copy.Cart.deliveryNotice}</p>
             )}
             {errors.mode && (
               <p className="field-error" role="alert">
@@ -237,12 +228,11 @@ export function Cart() {
               </p>
             )}
             <label>
-              Observações gerais
-              <textarea
+              {copy.Cart.orderNoteLabel}<textarea
                 rows={3}
-                maxLength={500}
+                maxLength={site.cart.orderNoteMaxLength}
                 {...register("note")}
-                placeholder="Conte como prefere seu pedido"
+                placeholder={copy.Cart.orderNotePlaceholder}
               />
             </label>
             {errors.note && (
@@ -251,29 +241,24 @@ export function Cart() {
               </p>
             )}
             <button type="submit" className="button">
-              Consultar pelo WhatsApp <ArrowUpRight size={18} />
+              {copy.Cart.prepareInquiry}<ArrowUpRight size={18} />
             </button>
             {url && (
               <div className="ready" role="status">
                 <p>
-                  Sua consulta está preparada. Abra o WhatsApp e confirme o
-                  envio da mensagem.
-                </p>
+                  {copy.Cart.readyMessage}</p>
                 <a
                   className="button"
                   href={url}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Abrir WhatsApp <ArrowUpRight size={18} />
+                  {copy.Cart.openWhatsapp}<ArrowUpRight size={18} />
                 </a>
               </div>
             )}
             <p className="form-hint">
-              A mensagem é uma consulta e precisa ser enviada por você no
-              WhatsApp. O pedido de entrega é finalizado no iFood. Seu nome não
-              será salvo neste site.
-            </p>
+              {copy.Cart.privacyNotice}</p>
           </form>
         </div>
       )}

@@ -59,7 +59,7 @@ tests/                 Browser tests
 
 ## Maintaining the menu and images
 
-Edit `src/data/catalog.ts`. Use `verificationStatus: 'pending'`, `price: null`, or `available: false` for unconfirmed items; ordering will be disabled. Add authorized images under `public/images/` and set `image` to their public path. Product images load lazily and retain their proportions. Items without photographs use a text-based presentation.
+Edit `src/config/catalog.json`. Use `verificationStatus: 'pending'`, `price: null`, or `available: false` for unconfirmed items; ordering will be disabled. Add authorized images under `public/images/` and set `image` to their public path. Product images load lazily and retain their proportions. Items without photographs use a text-based presentation.
 
 The AI-generated hero image at `public/images/cuscuz-ilustrativo.jpg` is visibly labeled as illustrative. See [image provenance](docs/IMAGE-PROMPT.md). The original 150 ? 150 logo is preserved at `public/images/logo cuscuzeira gourmet.jpg` and rendered by `BrandArtwork`. Existing asset names and Portuguese customer-facing routes are retained for compatibility.
 
@@ -82,3 +82,7 @@ Serve `dist/` with an SPA fallback to `index.html` for React Router. A Netlify e
 See the [deployment guide](docs/DEPLOYMENT.md), [source audit](docs/SOURCES.md), and [commercial proposal](docs/COMMERCIAL_PROPOSAL.md).
 
 Before commercial launch, verify the outstanding business information in the source audit. Logo and photo authorization has already been confirmed. Future improvements include higher-resolution food photographs, live availability, and catalog administration. Google Fonts currently load externally with local font fallbacks; self-hosting requires the appropriate font licenses.
+
+## Configuration
+
+Business details, copy, assets, routes, cordel booklets, theme, and cart limits are centralized under `src/config/`. See the [configuration guide](docs/CONFIGURATION.md) for editable fields, placeholders, validation, and publishing instructions.

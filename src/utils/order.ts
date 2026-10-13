@@ -1,7 +1,9 @@
+import { copy, formatText } from "../config/content";
+import { site, whatsappLink } from "../config/site";
 import type { CartItem, Order, Product } from "../types";
 import { restaurant } from "../data/restaurant";
 export const money = (value: number) =>
-  new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(
+  new Intl.NumberFormat(site.locale, { style: "currency", currency: site.currency }).format(
     value,
   );
 export function subtotal(items: CartItem[], products: Product[]) {
@@ -32,7 +34,7 @@ export function sanitizeCart(raw: unknown, products: Product[]): CartItem[] {
       seen.has(i.productId) ||
       !Number.isInteger(i.quantity) ||
       i.quantity < 1 ||
-      i.quantity > 99 ||
+      i.quantity > site.cart.maxQuantity ||
       !products.some(
         (p) =>
           p.id === i.productId &&
@@ -47,7 +49,7 @@ export function sanitizeCart(raw: unknown, products: Product[]): CartItem[] {
       {
         productId: i.productId,
         quantity: i.quantity,
-        note: typeof i.note === "string" ? i.note.slice(0, 300) : "",
+        note: typeof i.note === "string" ? i.note.slice(0, site.cart.itemNoteMaxLength) : "",
       },
     ];
   });
@@ -60,35 +62,35 @@ export function whatsappUrl(order: Order) {
       (i) =>
         !Number.isInteger(i.quantity) ||
         i.quantity < 1 ||
-        i.quantity > 99 ||
+        i.quantity > site.cart.maxQuantity ||
         !Number.isFinite(i.price) ||
         i.price < 0,
     )
   )
-    throw new Error("Pedido inválido");
+    throw new Error(copy.order.invalidOrder);
   if (order.mode && !restaurant.confirmedOrderModes.includes(order.mode))
-    throw new Error("Modalidade não confirmada");
+    throw new Error(copy.order.unconfirmedMode);
   const total =
     order.items.reduce(
       (s, i) => s + Math.round(i.price * 100) * i.quantity,
       0,
     ) / 100;
   const message = [
-    `Olá! Gostaria de consultar estes itens do cardápio da ${restaurant.name}.`,
+    formatText(copy.order.greeting, {value0: restaurant.name}),
     "",
-    "MINHA SELEÇÃO",
+    copy.order.selectionTitle,
     ...order.items.map(
       (i) =>
-        `${i.quantity}x ${i.name} — ${money(i.price * i.quantity)}${i.note ? `\n  Observação: ${i.note}` : ""}`,
+        `${i.quantity}x ${i.name} — ${money(i.price * i.quantity)}${i.note ? "\n  " + formatText(copy.order.itemNote, {note: i.note}) : ""}`,
     ),
     "",
-    `Observações: ${order.note || "Nenhuma"}`,
-    `Subtotal de referência do cardápio: ${money(total)}`,
-    `Nome: ${order.name}`,
-    `Atendimento: ${order.mode || "Consulta pelo WhatsApp. Entregas pelo iFood."}`,
-    ...(order.mode === "entrega" ? [`Endereço: ${order.address || ""}`] : []),
+    formatText(copy.order.notes, {value0: order.note || copy.order.noNotes}),
+    formatText(copy.order.subtotal, {value0: money(total)}),
+    formatText(copy.order.customerName, {value0: order.name}),
+    formatText(copy.order.fulfillment, {value0: order.mode || copy.order.defaultFulfillment}),
+    ...(order.mode === "entrega" ? [formatText(copy.order.address, {value0: order.address || ""})] : []),
     "",
-    "Poderiam confirmar a disponibilidade e esclarecer minhas observações?",
+    copy.order.closing,
   ].join("\n");
-  return `https://wa.me/${restaurant.phone}?text=${encodeURIComponent(message)}`;
+  return `${whatsappLink()}?text=${encodeURIComponent(message)}`;
 }

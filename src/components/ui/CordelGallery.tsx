@@ -1,3 +1,7 @@
+import { copy } from "../../config/content";
+import entries from "../../config/cordel.json" with { type: "json" };
+import { cordelSchema } from "../../config/schema";
+const poems = cordelSchema.parse(entries);
 import { SertaoArt } from "./SertaoArt";
 
 function Woodcut({ kind }: { kind: "corn" | "music" }) {
@@ -23,35 +27,31 @@ function Woodcut({ kind }: { kind: "corn" | "music" }) {
   );
 }
 
-const poems = [
-  { title: "Do milho nasce o encontro", number: "01", kind: "corn", lines: ["Quando o milho vira massa,", "vai subindo um cheiro bom.", "A conversa ganha espaço,", "a cozinha ganha um tom.", "E o cuscuz chega à mesa", "feito verso de um baião."] },
-  { title: "Um sertão de poesia", number: "02", kind: "landscape", lines: ["Tem o sol por testemunha,", "tem o verso no papel.", "Tem desenho feito em traço,", "tem história no cordel.", "Cada folha abre uma porta,", "cada rima, um carrossel."] },
-  { title: "Sabor que vira cantiga", number: "03", kind: "music", lines: ["A sanfona puxa o fole,", "vem chegando o cantador.", "Entre um verso e uma prosa,", "vai passando o bom sabor.", "Nossa mesa fica cheia", "de conversa e de calor."] },
-] as const;
+
 
 export function CordelGallery() {
   return (
     <section className="cordel-gallery" aria-labelledby="cordel-title">
       <div className="wrap">
         <div className="cordel-heading">
-          <span className="eyebrow">CULTURA QUE A GENTE LEVA À MESA</span>
-          <h2 id="cordel-title">Nosso varal de <em>cordel.</em></h2>
-          <p>Um pouco de verso, um tanto de prosa e muito Nordeste.</p>
+          <span className="eyebrow">{copy.CordelGallery.eyebrow}</span>
+          <h2 id="cordel-title">{copy.CordelGallery.title}<em>{copy.CordelGallery.titleAccent}</em></h2>
+          <p>{copy.CordelGallery.description}</p>
         </div>
         <div className="cordel-clothesline">
           {poems.map(poem => (
             <article className={"cordel-booklet cordel-booklet-" + poem.kind} key={poem.number}>
               <div className="cordel-booklet-frame">
-                <span className="cordel-edition">CUSCUZERIA GOURMET · Nº {poem.number}</span>
+                <span className="cordel-edition">{copy.CordelGallery.editionLabel}{poem.number}</span>
                 <h3>{poem.title}</h3>
-                <div className="cordel-print">{poem.kind === "landscape" ? <SertaoArt /> : <Woodcut kind={poem.kind} />}</div>
+                <div className="cordel-print">{poem.kind === "landscape" ? <SertaoArt /> : <Woodcut kind={poem.kind === "corn" ? "corn" : "music"} />}</div>
                 <p className="cordel-verse">{poem.lines.map(line => <span key={line}>{line}</span>)}</p>
-                <span className="cordel-booklet-mark" aria-hidden="true">✦ ━ ✦ ━ ✦</span>
+                <span className="cordel-booklet-mark" aria-hidden="true">{copy.CordelGallery.ornament}</span>
               </div>
             </article>
           ))}
         </div>
-        <p className="cordel-colophon">Versos originais da casa · Ilustrações inspiradas na xilogravura</p>
+        <p className="cordel-colophon">{copy.CordelGallery.credit}</p>
       </div>
     </section>
   );

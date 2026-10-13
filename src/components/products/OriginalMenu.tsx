@@ -1,48 +1,42 @@
+import { site } from "../../config/site";
+import { copy, formatText } from "../../config/content";
 import { ArrowUpRight, BookOpen } from "lucide-react";
 import { restaurant } from "../../data/restaurant";
 
-const pages = [
-  "Cuscuzes salgados e doces",
-  "Pratos executivos",
-  "Tapiocas, lanches, porções e salgados",
-  "Sorvetes e sobremesas",
-];
+const pages = site.menuPages;
 export function OriginalMenu() {
   return (
     <details className="original-menu">
       <summary>
         <BookOpen size={21} />
         <span>
-          Ver cardápio original<small>As 4 páginas do restaurante</small>
+          {copy.OriginalMenu.title}<small>{copy.OriginalMenu.pageCount}</small>
         </span>
         <span className="original-menu-plus" aria-hidden="true">
-          +
-        </span>
+          {copy.OriginalMenu.expandSymbol}</span>
       </summary>
       <div className="original-menu-content">
         <p>
-          Consulte as páginas que deram origem ao nosso catálogo. Para delivery,
-          confira os valores atuais no iFood.
-        </p>
+          {copy.OriginalMenu.description}</p>
         <div className="original-menu-grid">
-          {pages.map((name, index) => (
+          {pages.map(({ title: name, image, width, height }, index) => (
             <figure key={name}>
               <a
-                href={`/images/cardapio/pagina-${index + 1}.png`}
+                href={image}
                 target="_blank"
                 rel="noreferrer"
-                aria-label={`Abrir página ${index + 1}: ${name}`}
+                aria-label={formatText(copy.OriginalMenu.openPageLabel, {value0: index + 1, value1: name})}
               >
                 <img
-                  src={`/images/cardapio/pagina-${index + 1}.png`}
-                  width="376"
-                  height="531"
+                  src={image}
+                  width={width}
+                  height={height}
                   loading="lazy"
-                  alt={`Página ${index + 1} do cardápio original: ${name}`}
+                  alt={formatText(copy.OriginalMenu.pageImageAlt, {value0: index + 1, value1: name})}
                 />
               </a>
               <figcaption>
-                {String(index + 1).padStart(2, "0")} · {name}
+                {String(index + 1).padStart(2, "0")} {copy.OriginalMenu.captionSeparator}{name}
               </figcaption>
             </figure>
           ))}
@@ -53,7 +47,7 @@ export function OriginalMenu() {
           target="_blank"
           rel="noreferrer"
         >
-          Abrir original no Canva <ArrowUpRight size={17} />
+          {copy.OriginalMenu.openSource}<ArrowUpRight size={17} />
         </a>
       </div>
     </details>

@@ -1,20 +1,17 @@
+import { copy } from "../../config/content";
 import { ArrowUpRight } from "lucide-react";
 import { restaurant } from "../../data/restaurant";
 
 export function DeliveryCallout({ cart = false }: { cart?: boolean }) {
   return (
-    <aside className="delivery-callout" aria-label="Entrega pelo iFood">
+    <aside className="delivery-callout" aria-label={copy.DeliveryCallout.regionLabel}>
       <div>
-        <h2>Seu delivery é pelo iFood.</h2>
+        <h2>{copy.DeliveryCallout.title}</h2>
         <p>
-          Escolha os itens e finalize seu pedido no iFood. Preços,
-          disponibilidade, frete e prazo de entrega são informados por lá.
-        </p>
+          {copy.DeliveryCallout.description}</p>
         {cart && (
           <p className="delivery-hint">
-            O carrinho deste site não é transferido automaticamente. Selecione
-            seus itens novamente no iFood.
-          </p>
+            {copy.DeliveryCallout.cartNotice}</p>
         )}
       </div>
       <a
@@ -23,7 +20,7 @@ export function DeliveryCallout({ cart = false }: { cart?: boolean }) {
         target="_blank"
         rel="noreferrer"
       >
-        Pedir no iFood <ArrowUpRight size={18} />
+        {copy.DeliveryCallout.orderAction}<ArrowUpRight size={18} />
       </a>
     </aside>
   );

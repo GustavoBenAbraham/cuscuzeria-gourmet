@@ -1,3 +1,5 @@
+import { site, whatsappLink } from "../../config/site";
+import { copy, formatText } from "../../config/content";
 import { useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import {
@@ -7,6 +9,7 @@ import {
   Instagram,
   ArrowUpRight,
   MessageCircle,
+  Phone,
 } from "lucide-react";
 import { useCart } from "../../hooks/useCart";
 import { restaurant } from "../../data/restaurant";
@@ -23,28 +26,21 @@ export function Layout() {
   const { count } = useCart();
   return (
     <>
-      <a className="skip-link" href="#conteudo">
-        Pular para o conteúdo
-      </a>
+      <a className="skip-link" href={"#" + site.sections.mainId}>
+        {copy.Layout.skipNavigation}</a>
       <div className="topline">
-        SABOR NORDESTINO <span>✳</span> DELIVERY PELO IFOOD
-      </div>
+        {copy.Layout.toplineTagline}<span>{copy.Layout.toplineSymbol}</span> {copy.Layout.toplineDelivery}</div>
       <header>
         <div className="header-inner">
-          <Link to="/" aria-label="Cuscuzeria Gourmet início">
+          <Link to={site.routes.home} aria-label={copy.Layout.homeLabel}>
             <Brand />
           </Link>
           <nav
             className={open ? "nav open" : "nav"}
-            aria-label="Navegação principal"
+            aria-label={copy.Layout.navigationLabel}
           >
-            {[
-              ["/", "Início"],
-              ["/cardapio", "Cardápio"],
-              ["/nossa-historia", "Nossa história"],
-              ["/contato", "Contato"],
-            ].map(([to, label]) => (
-              <NavLink key={to} to={to} onClick={() => setOpen(false)}>
+            {site.navigation.map(({ id, label }) => (
+              <NavLink key={id} to={site.routes[id as keyof typeof site.routes]} onClick={() => setOpen(false)}>
                 {label}
               </NavLink>
             ))}
@@ -52,8 +48,8 @@ export function Layout() {
           <div className="header-actions">
             <Link
               className="cart-icon"
-              to="/pedido"
-              aria-label={`Carrinho com ${count} itens`}
+              to={site.routes.cart}
+              aria-label={formatText(copy.Layout.cartLabel, {value0: count})}
             >
               <ShoppingBag size={22} />
               <span>{count}</span>
@@ -64,11 +60,11 @@ export function Layout() {
               target="_blank"
               rel="noreferrer"
             >
-              Pedir no iFood <ArrowUpRight size={16} />
+              {copy.Layout.deliveryAction}<ArrowUpRight size={16} />
             </a>
             <button
               className="mobile-toggle"
-              aria-label={open ? "Fechar menu" : "Abrir menu"}
+              aria-label={open ? copy.Layout.closeMenu : copy.Layout.openMenu}
               aria-expanded={open}
               onClick={() => setOpen(!open)}
             >
@@ -77,7 +73,7 @@ export function Layout() {
           </div>
         </div>
       </header>
-      <main id="conteudo">
+      <main id={site.sections.mainId}>
         <Outlet />
       </main>
       <footer>
@@ -85,70 +81,65 @@ export function Layout() {
           <div>
             <Brand />
             <p>
-              Um pedacinho do Nordeste
-              <br />
-              em cada sabor.
-            </p>
+              {copy.Layout.footerTaglineLineOne}<br />
+              {copy.Layout.footerTaglineLineTwo}</p>
           </div>
           <div>
-            <h3>Explore</h3>
-            <Link to="/cardapio">Cardápio</Link>
-            <Link to="/nossa-historia">Nossa história</Link>
-            <Link to="/contato">Contato</Link>
+            <h3>{copy.Layout.exploreTitle}</h3>
+            {site.navigation.filter(item => item.id !== "home").map(item => <Link key={item.id} to={site.routes[item.id as keyof typeof site.routes]}>{item.label}</Link>)}
           </div>
           <div>
-            <h3>Vamos conversar?</h3>
+            <h3>{copy.Layout.contactTitle}</h3>
             <div className="social-links">
               <a
                 className="social-link whatsapp-link"
-                href={`https://wa.me/${restaurant.phone}`}
+                href={whatsappLink()}
                 target="_blank"
                 rel="noreferrer"
               >
-                <MessageCircle size={17} /> WhatsApp
-              </a>
+                <MessageCircle size={17} /> {copy.Layout.whatsappLabel}</a>
               <a
                 className="social-link instagram-link"
                 href={restaurant.instagram}
                 target="_blank"
                 rel="noreferrer"
               >
-                <Instagram size={17} /> Instagram
-              </a>
+                <Instagram size={17} /> {copy.Layout.instagramLabel}</a>
             </div>
             <a href={restaurant.deliveryUrl} target="_blank" rel="noreferrer">
-              <ShoppingBag size={17} /> Delivery pelo iFood
-            </a>
+              <ShoppingBag size={17} /> {copy.Layout.deliveryLabel}</a>
             <a
-              href={`https://wa.me/${restaurant.phone}`}
+              href={whatsappLink()}
               target="_blank"
               rel="noreferrer"
               className="contact-whatsapp"
             >
-              <MessageCircle size={17} /> (11) 99017-5768
-            </a>
+              <MessageCircle size={17} /> {copy.Layout.phoneLabel}</a>
             <a href={restaurant.instagram} target="_blank" rel="noreferrer">
-              <Instagram size={17} /> @cuscuzgourmmet
-            </a>
+              <Instagram size={17} /> {copy.Layout.instagramHandle}</a>
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Cuscuzeria Gourmet.</span>
-          <span>Projeto demonstrativo · disponibilidade a confirmar</span>
+          <span>{copy.Layout.copyrightSymbol}{new Date().getFullYear()} {copy.Layout.copyrightName}</span>
+          <span>{copy.Layout.demoNotice}</span>
         </div>
       </footer>
-      <a
+      {site.features.floatingWhatsapp && <a
         className="whatsapp-float"
-        href={`https://wa.me/${restaurant.phone}`}
+        href={whatsappLink()}
         target="_blank"
         rel="noreferrer"
-        aria-label="Conversar pelo WhatsApp"
+        aria-label={copy.Layout.floatingWhatsappLabel}
       >
-        <MessageCircle size={24} />
+        <span className="whatsapp-float-icon" aria-hidden="true">
+          <MessageCircle className="whatsapp-bubble" />
+          <Phone className="whatsapp-phone" />
+        </span>
       </a>
+      }
       {count > 0 && (
-        <Link className="mobile-cart" to="/pedido">
-          <ShoppingBag size={19} /> Visualizar pedido <b>{count}</b>
+        <Link className="mobile-cart" to={site.routes.cart}>
+          <ShoppingBag size={19} /> {copy.Layout.viewCart}<b>{count}</b>
         </Link>
       )}
     </>

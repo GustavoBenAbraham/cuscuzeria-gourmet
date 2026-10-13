@@ -4,7 +4,7 @@ Audit date: 2026-10-11.
 
 Primary source: https://www.canva.com/design/DAGJpyE4oe0/OQbqzlg1AIlNliLhPgT4XA/view
 
-The research browser could not open Canva, but the Canva connector returned the full text and thumbnails for all four pages. Thumbnails are stored in `docs/sources/page-1.png` through `page-4.png`. Prices were matched visually rather than by extraction order. Each product in `src/data/catalog.ts` records its source page.
+The research browser could not open Canva, but the Canva connector returned the full text and thumbnails for all four pages. Thumbnails are stored in `docs/sources/page-1.png` through `page-4.png`. Prices were matched visually rather than by extraction order. Each product in `src/config/catalog.json` records its source page.
 
 | Page | Content | Catalog options |
 | --- | --- | --- |

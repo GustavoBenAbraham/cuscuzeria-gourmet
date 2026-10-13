@@ -1,3 +1,5 @@
+import { site } from "../config/site";
+import { copy } from "../config/content";
 import { useEffect, useState } from "react";
 import { Search, SlidersHorizontal } from "lucide-react";
 import type { Product, Category } from "../types";
@@ -19,7 +21,7 @@ export function Catalog({ embedded = false }: { embedded?: boolean }) {
   } | null>(null);
   const [error, setError] = useState(false);
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState(embedded ? "cuscuz" : "all");
+  const [category, setCategory] = useState(embedded ? site.catalog.homeCategory : "all");
   const [featured, setFeatured] = useState(false);
   const [sort, setSort] = useState("original");
   function load() {
@@ -41,69 +43,65 @@ export function Catalog({ embedded = false }: { embedded?: boolean }) {
     filtered = [...filtered].sort((a, b) =>
       sort === "price"
         ? (a.price ?? Infinity) - (b.price ?? Infinity)
-        : a.name.localeCompare(b.name, "pt-BR"),
+        : a.name.localeCompare(b.name, site.locale),
     );
   return (
     <section
-      id="cardapio"
+      id={site.sections.menuId}
       className={`wrap section catalog${embedded ? " catalog-embedded" : ""}`}
-      aria-label="Cardápio completo"
+      aria-label={copy.Catalog.regionLabel}
     >
       <div className="menu-heading">
         <div>
-          <div className="eyebrow">FEITO DE SABORES. CHEIO DE NORDESTE.</div>
+          <div className="eyebrow">{copy.Catalog.eyebrow}</div>
           <Title>
-            Oxe, que <em>cardápio!</em>
+            {copy.Catalog.title}<em>{copy.Catalog.titleAccent}</em>
           </Title>
           <p>
-            Do cuscuz ao doce: escolha sua categoria, descubra os pratos e
-            encontre seu favorito.
-          </p>
+            {copy.Catalog.description}</p>
         </div>
         <RegionalMotif />
       </div>
       <div className="menu-facts">
         <span>
-          <b>{data?.products.length ?? "—"}</b> opções no cardápio
-        </span>
+          <b>{data?.products.length ?? "—"}</b> {copy.Catalog.productCountSuffix}</span>
         <span>
-          <b>{data?.categories.length ?? "—"}</b> categorias para explorar
-        </span>
+          <b>{data?.categories.length ?? "—"}</b> {copy.Catalog.categoryCountSuffix}</span>
         <span>
-          Entrega pelo <b>iFood</b>
+          {copy.Catalog.deliveryPrefix}<b>{copy.Catalog.deliveryProvider}</b>
         </span>
       </div>
-      <OriginalMenu />
+      {site.features.originalMenu && <OriginalMenu />}
       <div className="catalog-controls">
         <label className="search">
           <Search size={20} />
           <input
-            placeholder="Busque por prato ou ingrediente"
+            placeholder={copy.Catalog.searchPlaceholder}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            aria-label="Pesquisar produtos"
+            aria-label={copy.Catalog.searchLabel}
           />
         </label>
         <label className="sort">
           <SlidersHorizontal size={18} />
           <select
-            aria-label="Ordenar produtos"
+            aria-label={copy.Catalog.sortLabel}
             value={sort}
             onChange={(e) => setSort(e.target.value)}
           >
-            <option value="original">Ordem do cardápio</option>
-            <option value="price">Menor preço</option>
-            <option value="name">Nome A–Z</option>
+            <option value="original">{copy.Catalog.sortOriginal}</option>
+            <option value="price">{copy.Catalog.sortPrice}</option>
+            <option value="name">{copy.Catalog.sortName}</option>
           </select>
         </label>
       </div>
-      <div className="categories" aria-label="Categorias">
+      <div className="categories" aria-label={copy.Catalog.categoriesLabel}>
         <button
           className={category === "all" ? "selected" : ""}
           aria-pressed={category === "all"}
           onClick={() => setCategory("all")}
         >
-          Todos <span>{data?.products.length ?? 0}</span>
+          {copy.Catalog.allCategories}<span>{data?.products.length ?? 0}</span>
         </button>
         {data?.categories.map((c) => (
           <button
@@ -120,28 +118,26 @@ export function Catalog({ embedded = false }: { embedded?: boolean }) {
         ))}
       </div>
       <div className="results">
-        <span aria-live="polite">{filtered.length} opções para descobrir</span>
+        <span aria-live="polite">{filtered.length} {copy.Catalog.resultsSuffix}</span>
         <label>
           <input
             type="checkbox"
             checked={featured}
             onChange={(e) => setFeatured(e.target.checked)}
           />{" "}
-          Seleção da casa
-        </label>
+          {copy.Catalog.featuredLabel}</label>
       </div>
       {error ? (
         <div role="alert" className="empty">
-          Não foi possível carregar o cardápio.
-          <button onClick={load}>Tentar novamente</button>
+          {copy.Catalog.loadError}<button onClick={load}>{copy.Catalog.retry}</button>
         </div>
       ) : !data ? (
-        <p role="status">Preparando o cardápio…</p>
+        <p role="status">{copy.Catalog.loading}</p>
       ) : !filtered.length ? (
         <div className="empty">
           <Search size={36} />
-          <h2>Nenhum sabor encontrado.</h2>
-          <p>Tente outro nome ou explore todas as categorias.</p>
+          <h2>{copy.Catalog.emptyTitle}</h2>
+          <p>{copy.Catalog.emptyDescription}</p>
           <button
             className="button"
             onClick={() => {
@@ -150,8 +146,7 @@ export function Catalog({ embedded = false }: { embedded?: boolean }) {
               setFeatured(false);
             }}
           >
-            Limpar filtros
-          </button>
+            {copy.Catalog.clearFilters}</button>
         </div>
       ) : (
         <div className="menu-groups">
@@ -169,8 +164,7 @@ export function Catalog({ embedded = false }: { embedded?: boolean }) {
                   <i aria-hidden="true" />
                   <small>
                     {filtered.filter((p) => p.categoryId === c.id).length}{" "}
-                    opções
-                  </small>
+                    {copy.Catalog.categoryCountLabel}</small>
                 </div>
                 <div className="menu-product-grid">
                   {filtered
@@ -184,9 +178,7 @@ export function Catalog({ embedded = false }: { embedded?: boolean }) {
         </div>
       )}
       <p className="source-caption">
-        Fonte: cardápio oficial, 4 páginas. Para delivery, valem os preços e a
-        disponibilidade exibidos no iFood. Imagens ilustrativas.
-      </p>
+        {copy.Catalog.sourceNotice}</p>
       <DeliveryCallout />
     </section>
   );

@@ -1,11 +1,13 @@
+import { site } from "../../config/site";
+import { copy } from "../../config/content";
 export function BrandArtwork({ className = "" }: { className?: string }) {
   return (
     <img
       className={`original-logo ${className}`.trim()}
-      src="/images/logo%20cuscuzeira%20gourmet.jpg"
-      width="150"
-      height="150"
-      alt="Cuscuzeria Gourmet — Sabor Nordestino"
+      src={site.branding.logo}
+      width={site.branding.logoWidth}
+      height={site.branding.logoHeight}
+      alt={copy.BrandArtwork.logoAlt}
       loading="eager"
       decoding="async"
     />
@@ -20,7 +22,7 @@ export function RegionalMotif({ className = "" }: { className?: string }) {
       aria-hidden="true"
       focusable="false"
     >
-      <image href="/images/cardapio/pagina-1.png" width="376" height="531" />
+      <image href={site.menuPages[0]?.image} width="376" height="531" />
     </svg>
   );
 }

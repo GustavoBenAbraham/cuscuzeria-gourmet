@@ -1,3 +1,5 @@
+import { site, whatsappLink } from "../config/site";
+import { copy } from "../config/content";
 ﻿import {
   ArrowUpRight,
   ArrowDown,
@@ -20,11 +22,11 @@ export function Home() {
       <section className="nordeste-hero">
         <img
           className="nordeste-hero-photo"
-          src="/images/cuscuz-ilustrativo.jpg"
-          width="960"
-          height="1200"
+          src={site.branding.hero}
+          width={site.branding.heroWidth}
+          height={site.branding.heroHeight}
           fetchPriority="high"
-          alt="Composição ilustrativa de cuscuz com carne seca e queijo coalho, criada por IA"
+          alt={copy.Home.heroImageAlt}
         />
         <div className="nordeste-hero-shade" />
         <div className="wrap nordeste-hero-inner">
@@ -35,25 +37,18 @@ export function Home() {
             transition={{ duration: 0.45 }}
           >
             <div className="eyebrow">
-              CUSCUZERIA GOURMET <span aria-hidden="true">✳</span> SABOR
-              NORDESTINO
-            </div>
+              {copy.Home.brandName}<span aria-hidden="true">{copy.Home.heroSymbol}</span> {copy.Home.tagline}</div>
             <h1>
-              O Nordeste
-              <br />
-              mora no
-              <br />
-              <em>nosso sabor.</em>
+              {copy.Home.titleLineOne}<br />
+              {copy.Home.titleLineTwo}<br />
+              <em>{copy.Home.titleAccent}</em>
             </h1>
             <p>
-              Cuscuz de milho, queijo coalho e carne seca.
-              <br />
-              Combinações que carregam a nossa cultura
-              <br className="desktop-break" /> e dão vontade de chegar mais.
-            </p>
+              {copy.Home.introLineOne}<br />
+              {copy.Home.introLineTwo}<br className="desktop-break" /> {copy.Home.introLineThree}</p>
             <div className="hero-buttons">
-              <a className="button corn-button" href="#cardapio">
-                Conhecer o cardápio <ArrowDown size={18} />
+              <a className="button corn-button" href={"#" + site.sections.menuId}>
+                {copy.Home.menuAction}<ArrowDown size={18} />
               </a>
               <a
                 className="button outline-button"
@@ -61,62 +56,54 @@ export function Home() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Pedir no iFood <ArrowUpRight size={19} />
+                {copy.Home.deliveryAction}<ArrowUpRight size={19} />
               </a>
             </div>
             <div className="hero-signature">
               <span className="signature-star" aria-hidden="true">
-                ✳
-              </span>
+                {copy.Home.signatureSymbol}</span>
               <span>
-                DA NOSSA CULTURA.
-                <br />
-                <b>PARA A SUA MESA.</b>
+                {copy.Home.signatureLineOne}<br />
+                <b>{copy.Home.signatureLineTwo}</b>
               </span>
             </div>
           </motion.div>
           <div className="hero-food-caption">
-            <span>UM CLÁSSICO DO NORDESTE</span>
-            <strong>Cuscuz, do nosso jeito.</strong>
-            <small>Imagem ilustrativa criada por IA</small>
+            <span>{copy.Home.photoEyebrow}</span>
+            <strong>{copy.Home.photoTitle}</strong>
+            <small>{copy.Home.photoDisclaimer}</small>
           </div>
         </div>
         <div className="cordel-edge" aria-hidden="true" />
       </section>
-      <div className="flavor-ribbon" aria-label="Sabores do cardápio">
-        <span>CUSCUZ DE MILHO</span>
-        <i>✳</i>
-        <span>QUEIJO COALHO</span>
-        <i>✳</i>
-        <span>CARNE SECA</span>
-        <i>✳</i>
-        <span>TAPIOCA</span>
-        <i>✳</i>
-        <span>UM DOCE FINAL</span>
+      <div className="flavor-ribbon" aria-label={copy.Home.ribbonLabel}>
+        <span>{copy.Home.ribbonCorn}</span>
+        <i>{copy.Home.ribbonSymbolOne}</i>
+        <span>{copy.Home.ribbonCheese}</span>
+        <i>{copy.Home.ribbonSymbolTwo}</i>
+        <span>{copy.Home.ribbonMeat}</span>
+        <i>{copy.Home.ribbonSymbolThree}</i>
+        <span>{copy.Home.ribbonTapioca}</span>
+        <i>{copy.Home.ribbonSymbolFour}</i>
+        <span>{copy.Home.ribbonDessert}</span>
       </div>
       <section className="nordeste-welcome">
         <div className="wrap welcome-grid">
           <div className="welcome-illustration">
             <SertaoArt />
-            <span>ONDE TEM CUSCUZ, TEM NORDESTE.</span>
+            <span>{copy.Home.illustrationCaption}</span>
           </div>
           <div className="welcome-copy">
-            <div className="eyebrow">CHEGUE MAIS, A MESA É SUA.</div>
+            <div className="eyebrow">{copy.Home.welcomeEyebrow}</div>
             <h2>
-              Tem raiz.
-              <br />
-              Tem história.
-              <br />
-              <em>Tem sabor nordestino.</em>
+              {copy.Home.welcomeTitleLineOne}<br />
+              {copy.Home.welcomeTitleLineTwo}<br />
+              <em>{copy.Home.welcomeTitleAccent}</em>
             </h2>
             <p>
-              O milho é o começo. Queijo coalho, carne seca, calabresa e coco
-              completam esse encontro de sabores. Na Cuscuzeria Gourmet, o
-              cardápio vai do cuscuz tradicional às combinações recheadas e
-              doces.
-            </p>
-            <a className="text-link" href="#cardapio">
-              Encontre seu favorito <ArrowUpRight size={18} />
+              {copy.Home.welcomeDescription}</p>
+            <a className="text-link" href={"#" + site.sections.menuId}>
+              {copy.Home.favoritesAction}<ArrowUpRight size={18} />
             </a>
           </div>
         </div>
@@ -124,38 +111,32 @@ export function Home() {
       <div className="menu-paper">
         <Catalog embedded />
       </div>
-      <CordelGallery />
+      {site.features.cordel && <CordelGallery />}
       <section className="nordeste-experience">
         <div className="wrap">
-          <div className="eyebrow">PRA CADA VONTADE, UM SABOR.</div>
+          <div className="eyebrow">{copy.Home.experienceEyebrow}</div>
           <h2>
-            Mais que cuscuz.
-            <br />
-            <em>Um cardápio pra descobrir.</em>
+            {copy.Home.experienceTitle}<br />
+            <em>{copy.Home.experienceTitleAccent}</em>
           </h2>
           <div className="experience-grid">
             <div>
               <Utensils size={30} />
-              <h3>Do jeitinho que você gosta</h3>
+              <h3>{copy.Home.cuscuzTitle}</h3>
               <p>
-                Tradicional, com recheio ou doce. Explore as 14 combinações de
-                cuscuz do cardápio.
-              </p>
+                {copy.Home.cuscuzDescription}</p>
             </div>
             <div>
               <ShoppingBag size={30} />
-              <h3>Do almoço ao lanche</h3>
+              <h3>{copy.Home.lunchTitle}</h3>
               <p>
-                Pratos executivos, tapiocas, lanches, porções e salgados para
-                escolher.
-              </p>
+                {copy.Home.lunchDescription}</p>
             </div>
             <div>
               <Heart size={30} />
-              <h3>Deixe espaço para o doce</h3>
+              <h3>{copy.Home.dessertTitle}</h3>
               <p>
-                Romeu & Julieta, creme de avelã, pudim, bolo de pote e gelados.
-              </p>
+                {copy.Home.dessertDescription}</p>
             </div>
           </div>
         </div>
@@ -163,40 +144,35 @@ export function Home() {
       <section className="nordeste-delivery">
         <div className="wrap delivery-grid">
           <div>
-            <div className="eyebrow">O NORDESTE TAMBÉM VAI ATÉ VOCÊ.</div>
+            <div className="eyebrow">{copy.Home.deliveryEyebrow}</div>
             <h2>
-              Bateu a vontade?
-              <br />
-              <em>É só pedir.</em>
+              {copy.Home.deliveryTitle}<br />
+              <em>{copy.Home.deliveryTitleAccent}</em>
             </h2>
             <p>
-              Faça seu pedido de entrega pelo iFood.
-              <br />
-              Consulte por lá o cardápio disponível, o frete e o prazo.
-            </p>
+              {copy.Home.deliveryDescription}<br />
+              {copy.Home.deliveryDetails}</p>
             <a
               className="button corn-button"
               href={restaurant.deliveryUrl}
               target="_blank"
               rel="noreferrer"
             >
-              Pedir no iFood <ArrowUpRight size={20} />
+              {copy.Home.deliveryButton}<ArrowUpRight size={20} />
             </a>
           </div>
           <div className="delivery-contact">
-            <span className="contact-kicker">VAMOS CONVERSAR?</span>
+            <span className="contact-kicker">{copy.Home.contactEyebrow}</span>
             <h3>
-              Uma dúvida antes
-              <br />
-              de escolher?
-            </h3>
-            <p>Fale diretamente com a Cuscuzeria Gourmet.</p>
+              {copy.Home.contactTitleLineOne}<br />
+              {copy.Home.contactTitleLineTwo}</h3>
+            <p>{copy.Home.contactDescription}</p>
             <a
-              href={`https://wa.me/${restaurant.phone}`}
+              href={whatsappLink()}
               target="_blank"
               rel="noreferrer"
             >
-              <MessageCircle size={21} /> (11) 99017-5768{" "}
+              <MessageCircle size={21} /> {copy.Home.contactPhone}{" "}
               <ArrowUpRight size={17} />
             </a>
             <a
@@ -205,7 +181,7 @@ export function Home() {
               target="_blank"
               rel="noreferrer"
             >
-              @cuscuzgourmmet <ArrowUpRight size={16} />
+              {copy.Home.contactInstagram}<ArrowUpRight size={16} />
             </a>
           </div>
         </div>

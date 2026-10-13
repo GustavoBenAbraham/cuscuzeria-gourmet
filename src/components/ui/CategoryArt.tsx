@@ -1,3 +1,4 @@
+import { copy } from "../../config/content";
 export function CategoryArt({ category }: { category: string }) {
   const gelato = category === "gelados",
     dessert = category === "sobremesas";
@@ -6,7 +7,7 @@ export function CategoryArt({ category }: { category: string }) {
       className="food-art"
       viewBox="0 0 600 500"
       role="img"
-      aria-label="Composição ilustrativa da categoria; não representa fotografia de produto"
+      aria-label={copy.CategoryArt.imageAlt}
     >
       <ellipse
         cx="300"

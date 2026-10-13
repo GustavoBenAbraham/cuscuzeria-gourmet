@@ -1,3 +1,5 @@
+import { site } from "../../config/site";
+import { copy, formatText } from "../../config/content";
 import { Plus, Minus } from "lucide-react";
 import type { Product } from "../../types";
 import { useCart } from "../../hooks/useCart";
@@ -25,31 +27,31 @@ export function ProductCard({
           ) : (
             <CategoryArt category={p.categoryId} />
           )}
-          {!p.image && <span>Ilustração</span>}
-          {p.featured && !compact && <b>Seleção da casa</b>}
+          {!p.image && <span>{copy.ProductCard.illustrationLabel}</span>}
+          {p.featured && !compact && <b>{copy.ProductCard.featuredLabel}</b>}
         </div>
       )}
       <div className="product-body">
         <Heading>{p.name}</Heading>
         <p>{p.description}</p>
         <div className="product-bottom">
-          <strong>{p.price === null ? "A confirmar" : money(p.price)}</strong>
+          <strong>{p.price === null ? copy.ProductCard.unconfirmedPrice : money(p.price)}</strong>
           {!p.available ||
           p.price === null ||
           p.verificationStatus !== "verified" ? (
-            <span>Indisponível</span>
+            <span>{copy.ProductCard.unavailableLabel}</span>
           ) : n ? (
             <div className="stepper">
               <button
-                aria-label={`Remover uma unidade de ${p.name}`}
+                aria-label={formatText(copy.ProductCard.decreaseLabel, {value0: p.name})}
                 onClick={() => cart.quantity(p.id, n - 1)}
               >
                 <Minus size={16} />
               </button>
               <span aria-live="polite">{n}</span>
               <button
-                aria-label={`Adicionar uma unidade de ${p.name}`}
-                disabled={n >= 99}
+                aria-label={formatText(copy.ProductCard.increaseLabel, {value0: p.name})}
+                disabled={n >= site.cart.maxQuantity}
                 onClick={() => cart.quantity(p.id, n + 1)}
               >
                 <Plus size={16} />
@@ -58,11 +60,10 @@ export function ProductCard({
           ) : (
             <button
               className="add"
-              aria-label={`Adicionar ${p.name}`}
+              aria-label={formatText(copy.ProductCard.addProductLabel, {value0: p.name})}
               onClick={() => cart.quantity(p.id, 1)}
             >
-              <Plus size={18} /> Adicionar
-            </button>
+              <Plus size={18} /> {copy.ProductCard.addLabel}</button>
           )}
         </div>
       </div>

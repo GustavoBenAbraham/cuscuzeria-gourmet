@@ -1,0 +1,113 @@
+{
+  "restaurant": {
+    "name": "Cuscuzeria Gourmet",
+    "phone": "5511990175768",
+    "instagram": "https://www.instagram.com/cuscuzgourmmet/",
+    "menu": "https://www.canva.com/design/DAGJpyE4oe0/OQbqzlg1AIlNliLhPgT4XA/view",
+    "deliveryUrl": "https://www.ifood.com.br/delivery/sao-paulo-sp/cuscuzeria-gourmet-sabor-nordestino-vila-teresinha/2ef57a2d-05c7-438d-8dac-9768740477d5?UTM_Medium=share",
+    "confirmedOrderModes": []
+  },
+  "locale": "pt-BR",
+  "currency": "BRL",
+  "branding": {
+    "tagline": "Sabor Nordestino",
+    "logo": "/images/logo%20cuscuzeira%20gourmet.jpg",
+    "logoWidth": 150,
+    "logoHeight": 150,
+    "hero": "/images/cuscuz-ilustrativo.jpg",
+    "heroWidth": 960,
+    "heroHeight": 1200,
+    "favicon": "/favicon.svg?v=logo-original",
+    "faviconPng": "/favicon-32.png",
+    "appleTouchIcon": "/apple-touch-icon.png"
+  },
+  "seo": {
+    "title": "{restaurantName} | Um pedacinho do Nordeste",
+    "description": "Explore o cardápio da {restaurantName}: cuscuzes, tapiocas, pratos executivos e doces. Peça delivery pelo iFood ou tire dúvidas pelo WhatsApp.",
+    "socialDescription": "Um pedacinho do Nordeste em cada sabor. Conheça nosso cardápio.",
+    "themeColor": "#f8f1e4"
+  },
+  "cart": {
+    "storageKey": "cuscuzeria-cart-v1",
+    "maxQuantity": 99,
+    "itemNoteMaxLength": 300,
+    "nameMinLength": 2,
+    "nameMaxLength": 80,
+    "orderNoteMaxLength": 500,
+    "addressMinLength": 8,
+    "addressMaxLength": 300
+  },
+  "catalog": {
+    "homeCategory": "cuscuz"
+  },
+  "features": {
+    "cordel": true,
+    "originalMenu": true,
+    "floatingWhatsapp": true
+  },
+  "navigation": [
+    {
+      "label": "Início",
+      "title": "Um pedacinho do Nordeste",
+      "id": "home"
+    },
+    {
+      "label": "Cardápio",
+      "title": "Cardápio",
+      "id": "menu"
+    },
+    {
+      "label": "Nossa história",
+      "title": "Nossa identidade",
+      "id": "story"
+    },
+    {
+      "label": "Contato",
+      "title": "Contato",
+      "id": "contact"
+    }
+  ],
+  "pages": {
+    "cart": {
+      "title": "Seu pedido"
+    },
+    "notFoundTitle": "Página não encontrada"
+  },
+  "menuPages": [
+    {
+      "title": "Cuscuzes salgados e doces",
+      "image": "/images/cardapio/pagina-1.png",
+      "width": 376,
+      "height": 531
+    },
+    {
+      "title": "Pratos executivos",
+      "image": "/images/cardapio/pagina-2.png",
+      "width": 376,
+      "height": 531
+    },
+    {
+      "title": "Tapiocas, lanches, porções e salgados",
+      "image": "/images/cardapio/pagina-3.png",
+      "width": 376,
+      "height": 531
+    },
+    {
+      "title": "Sorvetes e sobremesas",
+      "image": "/images/cardapio/pagina-4.png",
+      "width": 376,
+      "height": 531
+    }
+  ],
+  "routes": {
+    "home": "/",
+    "menu": "/cardapio",
+    "cart": "/pedido",
+    "story": "/nossa-historia",
+    "contact": "/contato"
+  },
+  "sections": {
+    "menuId": "cardapio",
+    "mainId": "conteudo"
+  }
+}

@@ -124,3 +124,57 @@ test("mobile navigation and empty search results", async ({ page }) => {
   await page.getByRole("button", { name: "Limpar filtros" }).click();
   await expect(page.getByText("64 opções para descobrir")).toBeVisible();
 });
+
+
+test("configured routes, metadata, theme, and cordel are rendered", async ({page}) => {
+ const { site } = await import('../src/config/site');
+ const { theme } = await import('../src/config/theme');
+ const { default: poems } = await import('../src/config/cordel.json', { with: { type: 'json' } });
+ const errors: string[]=[];
+ page.on('pageerror',error=>errors.push(error.message));
+ for(const entry of site.navigation){
+  await page.goto(site.routes[entry.id]);
+  await expect(page).toHaveTitle(entry.title+' | '+site.restaurant.name);
+  await expect(page.locator('main h1')).toHaveCount(1);
+  await expect(page.locator('html')).toHaveAttribute('lang',site.locale);
+ }
+ await page.goto(site.routes.home);
+ const structuredData=JSON.parse(await page.locator('script[type="application/ld+json"]').textContent() || '{}');
+ expect(structuredData.name).toBe(site.restaurant.name);
+ expect(structuredData.telephone).toBe('+'+site.restaurant.phone);
+ await expect(page.locator('link[rel="icon"][type="image/svg+xml"]')).toHaveAttribute('href',site.branding.favicon);
+ await expect(page.locator('.cordel-booklet')).toHaveCount(site.features.cordel ? poems.length : 0);
+ if(site.features.cordel) for(const poem of poems)await expect(page.getByRole('heading',{name:poem.title,exact:true})).toBeVisible();
+ const button=page.locator('.header-actions .ifood-button');
+ await button.hover();
+ const hex=theme.colors.ifoodRed.slice(1);
+ const rgb='rgb('+[0,2,4].map(i=>parseInt(hex.slice(i,i+2),16)).join(', ')+')';
+ await expect(button).toHaveCSS('background-color',rgb);
+ await expect(button).toHaveCSS('color','rgb(255, 255, 255)');
+ expect(errors).toEqual([]);
+});
+
+test("configured cart limit disables increments and clearing persists", async ({page}) => {
+ const { site }=await import('../src/config/site');
+ const { products }=await import('../src/data/catalog');
+ const product=products.find(p=>p.available && p.price!==null)!;
+ await page.addInitScript(({key,id,quantity})=>localStorage.setItem(key,JSON.stringify([{productId:id,quantity,note:''}])),{key:site.cart.storageKey,id:product.id,quantity:site.cart.maxQuantity});
+ await page.goto(site.routes.cart);
+ await expect(page.locator('.cart-row .stepper button').last()).toBeDisabled();
+ await expect(page.locator('.item-note input')).toHaveAttribute('maxlength',String(site.cart.itemNoteMaxLength));
+ await page.locator('.cart-toolbar button').click();
+ await expect(page.locator('.cart-items')).toHaveCount(0);
+ await expect.poll(()=>page.evaluate(key=>localStorage.getItem(key),site.cart.storageKey)).toBe('[]');
+});
+
+test("storage failure keeps the in-memory cart usable and explains the limitation", async ({page}) => {
+ const { site }=await import('../src/config/site');
+ await page.addInitScript(()=>{Storage.prototype.setItem=function(){throw new DOMException('Storage blocked','SecurityError');};});
+ await page.goto(site.routes.menu);
+ await page.locator('.product-card .add').first().click();
+ await page.locator('header .cart-icon').click();
+ await expect(page.locator('.cart-row')).toHaveCount(1);
+ await expect(page.locator('.checkout-grid [role="alert"]')).toBeVisible();
+ await page.locator('.cart-row .stepper button').last().click();
+ await expect(page.locator('.cart-row .stepper span')).toHaveText('2');
+});

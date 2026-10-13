@@ -1,3 +1,5 @@
+import { copy } from "../config/content";
+import { site } from "../config/site";
 import {
   createContext,
   useContext,
@@ -8,7 +10,7 @@ import {
 import type { CartItem } from "../types";
 import { products } from "../data/catalog";
 import { sanitizeCart, subtotal } from "../utils/order";
-const key = "cuscuzeria-cart-v1";
+const key = site.cart.storageKey;
 function useCartState() {
   const [items, setItems] = useState<CartItem[]>(() => {
     try {
@@ -36,9 +38,9 @@ function useCartState() {
           ? prev.filter((i) => i.productId !== id)
           : prev.some((i) => i.productId === id)
             ? prev.map((i) =>
-                i.productId === id ? { ...i, quantity: Math.min(99, n) } : i,
+                i.productId === id ? { ...i, quantity: Math.min(site.cart.maxQuantity, n) } : i,
               )
-            : [...prev, { productId: id, quantity: Math.min(99, n), note: "" }],
+            : [...prev, { productId: id, quantity: Math.min(site.cart.maxQuantity, n), note: "" }],
         products,
       ),
     );
@@ -51,7 +53,7 @@ function useCartState() {
     note: (id: string, note: string) =>
       setItems((prev) =>
         prev.map((i) =>
-          i.productId === id ? { ...i, note: note.slice(0, 300) } : i,
+          i.productId === id ? { ...i, note: note.slice(0, site.cart.itemNoteMaxLength) } : i,
         ),
       ),
     count: items.reduce((s, i) => s + i.quantity, 0),
@@ -65,6 +67,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
 }
 export function useCart() {
   const value = useContext(Context);
-  if (!value) throw new Error("Carrinho indisponível");
+  if (!value) throw new Error(copy.useCart.unavailableError);
   return value;
 }

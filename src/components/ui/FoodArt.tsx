@@ -1,3 +1,4 @@
+import { copy } from "../../config/content";
 export function FoodArt({
   variant = "cuscuz",
   hero = false,
@@ -11,7 +12,7 @@ export function FoodArt({
       className={hero ? "food-art hero-art" : "food-art"}
       viewBox="0 0 600 500"
       role="img"
-      aria-label="Ilustração de prato nordestino; não representa fotografia do restaurante"
+      aria-label={copy.FoodArt.imageAlt}
     >
       <defs>
         <radialGradient id={`corn-${variant}`}>
