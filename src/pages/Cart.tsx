@@ -50,8 +50,7 @@ export function Cart() {
     defaultValues: { name: "", note: "", mode: "", address: "" },
   });
   function submit(data: Fields) {
-    setUrl(
-      whatsappUrl({
+    const orderUrl = whatsappUrl({
         name: data.name,
         note: data.note,
         mode: data.mode || undefined,
@@ -65,8 +64,9 @@ export function Cart() {
             note: i.note,
           };
         }),
-      }),
-    );
+      });
+    setUrl(orderUrl);
+    window.location.assign(orderUrl);
   }
   return (
     <section className="wrap section">

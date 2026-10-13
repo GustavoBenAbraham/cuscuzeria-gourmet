@@ -44,6 +44,12 @@ test("layout without overflow on mobile, tablet, and desktop", async ({ page }) 
 test("search, cart persistence, validation, and WhatsApp inquiry", async ({
   page,
 }) => {
+  await page.setViewportSize({width:390,height:844});
+  const whatsappRequests: string[] = [];
+  await page.route("https://wa.me/**", async route => {
+    whatsappRequests.push(route.request().url());
+    await route.fulfill({status:200,contentType:"text/html",body:"<p>WhatsApp test destination</p>"});
+  });
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/cardapio");
@@ -83,20 +89,20 @@ test("search, cart persistence, validation, and WhatsApp inquiry", async ({
   await expect(
     page.getByText("R$ 70,00", { exact: true }).first(),
   ).toBeVisible();
-  await page.getByRole("button", { name: "Consultar pelo WhatsApp" }).click();
+  await page.getByRole("button", { name: "Pedir pelo WhatsApp" }).click();
   await expect(
     page.getByText("Informe seu nome (pelo menos 2 caracteres)."),
   ).toBeVisible();
   await page.getByLabel("Seu nome").fill("João & Maria");
   await page.getByLabel("Observações gerais").fill("Obrigado!");
-  await page.getByRole("button", { name: "Consultar pelo WhatsApp" }).click();
-  const url = await page
-    .getByRole("link", { name: "Abrir WhatsApp", exact: true })
-    .getAttribute("href");
+  await page.getByRole("button", { name: "Pedir pelo WhatsApp" }).click();
+  await expect.poll(() => whatsappRequests.length).toBe(1);
+  const url = whatsappRequests[0];
   expect(url).toContain("https://wa.me/5511990175768?text=");
   expect(decodeURIComponent(url!)).toContain("2x Cuscuz Carne Seca e Catupiry");
   expect(decodeURIComponent(url!)).toContain("Sem cebola");
   expect(decodeURIComponent(url!)).toContain("Entregas pelo iFood");
+  await page.goto("/pedido");
   await page
     .getByRole("button", {
       name: "Remover Cuscuz Carne Seca e Catupiry",
