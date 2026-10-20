@@ -1,92 +1,131 @@
-# Cuscuzeria Gourmet
+# Cuscuzeria Gourmet 🌽
 
-Responsive restaurant website and digital menu inspired by northeastern Brazilian culture. Built with React, TypeScript, Vite, Tailwind CSS, React Router, Lucide, Motion, React Hook Form, and Zod.
+**Projeto de trabalho: site institucional e cardápio digital para um restaurante de culinária nordestina.**
 
-The customer interface is intentionally in Brazilian Portuguese. Repository documentation, code comments, and test descriptions use English.
+Desenvolvi este projeto para apresentar a Cuscuzeria Gourmet na web, organizar seu cardápio e facilitar o acesso aos canais de atendimento e delivery. A proposta combina uma identidade visual inspirada no Nordeste com uma experiência responsiva para quem acessa pelo computador ou celular.
 
-## Getting started
+[**Acessar o site**](https://gustavobenabraham.github.io/cuscuzeria-gourmet-site/) · [Documentação de configuração](docs/CONFIGURATION.md) · [Guia de publicação](docs/DEPLOYMENT.md)
 
-Requires Node.js 22.12 or later (validated with 24.19) and npm.
+![Página inicial da Cuscuzeria Gourmet em computador](docs/screenshots/home-desktop.png)
 
-```sh
+## Contexto do trabalho
+
+O projeto foi desenvolvido em um contexto profissional, a partir das necessidades de apresentação de um negócio real. O trabalho envolveu transformar o cardápio de referência em dados estruturados, adaptar a identidade visual do restaurante para a interface, construir a navegação e preparar a aplicação para publicação.
+
+O foco foi entregar uma presença digital com informações organizadas, acesso rápido aos produtos e integração por links com WhatsApp e iFood. A implementação atual é um frontend: o atendimento acontece nos canais externos e a aplicação não processa pagamentos nem confirma pedidos.
+
+## Funcionalidades
+
+- **Cardápio digital com 64 opções**, dividido em categorias, com busca que desconsidera acentos e ordenação de produtos.
+- **Carrinho persistente** no navegador, com controle de quantidade, observações por item e cálculo de valores em centavos.
+- **WhatsApp com mensagem preparada** a partir dos itens selecionados; o cliente confirma o envio no aplicativo.
+- **Acesso ao delivery pelo iFood**. O carrinho local não é transferido automaticamente para a plataforma.
+- **Layout responsivo**, com navegação adaptada para celular, tablet e computador.
+- **Identidade nordestina**, com cores, ilustrações, elementos de cordel e a marca original do restaurante.
+- **Acessibilidade**, incluindo navegação por teclado, foco visível, formulários identificados e suporte à redução de movimento.
+- **Metadados e dados estruturados** do tipo Restaurant para descrever o negócio.
+- **Configurações centralizadas** para editar cardápio, textos, rotas, identidade visual e limites do carrinho.
+
+## Prints do projeto
+
+Capturas reais da aplicação executada localmente. As imagens do cardápio e do carrinho mostram diferentes etapas da navegação.
+
+### Cardápio no computador
+
+![Cardápio digital com categorias e produtos](docs/screenshots/menu-desktop.png)
+
+### Experiência no celular
+
+| Página inicial | Carrinho com um item selecionado |
+| --- | --- |
+| ![Página inicial em tela de celular](docs/screenshots/home-mobile.png) | ![Carrinho em tela de celular](docs/screenshots/cart-mobile.png) |
+
+## Tecnologias utilizadas
+
+| Tecnologia | Aplicação no projeto |
+| --- | --- |
+| **React 19 + TypeScript** | Componentes reutilizáveis, estado da interface e tipos para produtos, carrinho e configurações. |
+| **Vite** | Ambiente de desenvolvimento e geração da versão de produção. |
+| **Tailwind CSS 4 + CSS** | Estilização, identidade visual e adaptação dos layouts. |
+| **React Router** | Navegação entre início, cardápio, pedido, história e contato. |
+| **React Hook Form + Zod** | Formulários e validação de dados e configurações. |
+| **Motion** | Animações de entrada com respeito à preferência de movimento reduzido. |
+| **Lucide React** | Ícones da interface. |
+| **localStorage** | Persistência do carrinho entre acessos no mesmo navegador. |
+| **Vitest + Playwright** | Testes unitários e testes de navegação em navegador real. |
+| **Git, GitHub e GitHub Pages** | Versionamento, apresentação do código e hospedagem estática. |
+
+## O que aprendi com este projeto
+
+- **Traduzir necessidades de um negócio em funcionalidades:** organizar a apresentação do restaurante, os produtos e os caminhos para atendimento.
+- **Estruturar uma aplicação React com TypeScript:** separar páginas, componentes, hooks, serviços e regras de domínio, mantendo contratos de dados claros.
+- **Trabalhar com informações de uma fonte real:** conferir categorias, preços e itens do cardápio, mantendo referências para facilitar futuras revisões.
+- **Gerenciar estado e persistência:** restaurar o carrinho, tratar dados inválidos, limitar quantidades e manter consistência nos cálculos monetários.
+- **Validar formulários e configurações:** oferecer mensagens claras e impedir que dados incompletos sigam no fluxo.
+- **Desenvolver interfaces responsivas e acessíveis:** considerar telas pequenas, navegação por teclado e preferências de movimento.
+- **Integrar canais externos:** preparar mensagens para o WhatsApp e deixar claro como o fluxo do site se relaciona com o iFood.
+- **Testar e publicar um frontend:** verificar regras de negócio e navegação, gerar o build e cuidar de rotas e caminhos de arquivos no GitHub Pages.
+
+## Executar localmente
+
+Requisitos: **Node.js 22.12 ou superior** e npm. Projeto validado com Node.js 24.
+
+```bash
+git clone https://github.com/GustavoBenAbraham/cuscuzeria-gourmet.git
+cd cuscuzeria-gourmet
 npm ci
 npm run dev
 ```
 
-Open the URL printed by Vite, usually http://127.0.0.1:5173. On PowerShell, use `npm.cmd` if the execution policy blocks `npm.ps1`.
+Abra o endereço informado pelo Vite, normalmente `http://127.0.0.1:5173`. No Windows, use `npm.cmd` se o PowerShell bloquear o comando `npm`.
 
-## Available commands
-
-| Command | Purpose |
+| Comando | Finalidade |
 | --- | --- |
-| `npm run dev` | Start the local development server |
-| `npm test` | Run unit tests |
-| `npx playwright test` | Run browser tests using installed Chrome |
-| `npm run build` | Check TypeScript and build into `dist/` |
-| `npm run preview` | Preview the production build |
+| `npm run dev` | Iniciar o ambiente local. |
+| `npm test` | Executar os testes unitários. |
+| `npm run build` | Verificar os tipos e gerar `dist/`. |
+| `npm run preview` | Visualizar o build localmente. |
+| `npm run test:e2e` | Executar testes no navegador; requer Google Chrome instalado. |
+| `npm run check` | Executar testes unitários, build e testes de navegador. |
+| `npm run build:pages` | Gerar o build com os caminhos do GitHub Pages. |
+| `npm run test:pages` | Verificar a versão preparada para o GitHub Pages. |
 
-## Features
-
-- 64 menu options checked against the four original menu pages.
-- Accent-insensitive search, category filters, featured items, and sorting.
-- Persistent cart with quantities from 1 to 99, item notes, removal, and totals calculated in cents. Invalid, duplicate, and unavailable entries are sanitized on restoration.
-- Validated customer name and notes. Form data stays in memory; cart items and notes are stored in the browser.
-- Delivery through the official iFood store. Customers select items and complete checkout there; the local cart is not transferred automatically. Prices, availability, delivery fees, coverage, and estimates are determined by iFood.
-- WhatsApp inquiries about selected items. Customers confirm sending in WhatsApp; the website does not assume receipt or automatically clear the cart.
-- Semantic HTML, keyboard focus, skip navigation, labeled forms, announced errors, reduced-motion support, basic metadata, and Restaurant JSON-LD based on documented information.
-- Original restaurant logo in the header, footer, favicon, and home-screen icon.
-
-This is a demonstration frontend without a backend, payments, or authentication. `confirmedOrderModes` covers only direct WhatsApp fulfillment and remains empty. Pickup is unconfirmed; iFood delivery does not enable address collection or direct delivery checkout through WhatsApp. The local selection does not reserve inventory or complete a sale.
-
-## Project structure
+## Organização do código
 
 ```text
 src/
-  components/layout/   Header, mobile navigation, and footer
-  components/ui/       Shared interface elements and SVG artwork
-  components/products/ Menu cards and quantity controls
-  data/                Editable menu and restaurant information
-  hooks/               Cart state and persistence
-  pages/               Home, menu, order, story, and contact pages
-  services/            Asynchronous catalog interface
-  types/               Shared domain types
-  utils/               Calculations, sanitization, and WhatsApp messages
-  styles/              Responsive styles and Tailwind
-public/                Static assets, images, and icons
-docs/                  Sources, image provenance, deployment, and proposal
-tests/                 Browser tests
+├── components/   # Layout, produtos e elementos reutilizáveis
+├── config/       # Cardápio, textos, marca, rotas e validações
+├── data/         # Dados de domínio expostos para a aplicação
+├── hooks/        # Estado e persistência do carrinho
+├── pages/        # Início, cardápio, carrinho, história e contato
+├── services/     # Interface de acesso ao catálogo
+├── styles/       # Estilos globais, marca e identidade regional
+├── types/        # Tipos compartilhados
+└── utils/        # Cálculos, sanitização e mensagens de WhatsApp
+public/           # Imagens, ícones e arquivos estáticos
+tests/            # Testes de navegação e do GitHub Pages
+docs/             # Prints e documentação de apoio
+scripts/          # Publicação e prévia do GitHub Pages
 ```
 
-## Maintaining the menu and images
+## Qualidade e decisões técnicas
 
-Edit `src/config/catalog.json`. Use `verificationStatus: 'pending'`, `price: null`, or `available: false` for unconfirmed items; ordering will be disabled. Add authorized images under `public/images/` and set `image` to their public path. Product images load lazily and retain their proportions. Items without photographs use a text-based presentation.
+Os testes unitários verificam cálculos, recuperação de dados do carrinho, limites, configurações e montagem das mensagens. Os testes de navegador exercitam busca, navegação, persistência, validação e layouts em diferentes tamanhos de tela, sem enviar mensagens ao restaurante.
 
-The AI-generated hero image at `public/images/cuscuz-ilustrativo.jpg` is visibly labeled as illustrative. See [image provenance](docs/IMAGE-PROMPT.md). The original 150 ? 150 logo is preserved at `public/images/logo cuscuzeira gourmet.jpg` and rendered by `BrandArtwork`. Existing asset names and Portuguese customer-facing routes are retained for compatibility.
+O catálogo fica em `src/config/catalog.json`. A camada `catalogService` permite evoluir o acesso a dados para uma API. A aplicação atual não possui backend, autenticação, estoque em tempo real ou processamento de pagamentos. Disponibilidade, taxas e condições de entrega são determinadas pelo iFood.
 
-Regional styling lives in `src/styles/nordeste.css`; `SertaoArt` provides original SVG artwork. Fortal Cuscuz informed the visual organization; no competitor photographs or commercial content were reused.
+A fotografia principal de cuscuz é uma **imagem ilustrativa gerada por IA**, identificada na interface. A origem dos materiais e as referências do cardápio estão documentadas em [fontes e conferência](docs/SOURCES.md) e [procedência da imagem](docs/IMAGE-PROMPT.md).
 
-The home page initially shows savory cuscuz, while `/cardapio` shows all 64 options. Both support search, categories, and quantity controls. An expandable section displays the four original pages in `public/images/cardapio/`.
+## Documentação complementar
 
-`catalogService.getCatalog()` is the replacement point for a future REST API. Preserve types and stable IDs when integrating a backend such as Spring Boot/PostgreSQL.
+- [Configuração e manutenção do conteúdo](docs/CONFIGURATION.md)
+- [Build, rotas e publicação](docs/DEPLOYMENT.md)
+- [Fontes do cardápio e informações do negócio](docs/SOURCES.md)
+- [Procedência da imagem ilustrativa](docs/IMAGE-PROMPT.md)
 
-## Validation
+## Autor e uso dos materiais
 
-Unit tests cover currency calculations, corrupted state, duplicates, quantity limits, unavailable and pending products, WhatsApp encoding, and rejection of unconfirmed fulfillment modes. Catalog checks cover IDs, categories, item counts, source references, and critical price associations.
+Desenvolvido por [**Gustavo Ben Abraham**](https://github.com/GustavoBenAbraham), como projeto de trabalho para a **Cuscuzeria Gourmet**.
 
-Browser tests cover 360, 768, and 1440 pixel viewports, navigation, search, persistence, quantities, and the inquiry flow. They start a separate Vite server and do not send messages to the restaurant.
-
-## Deployment
-
-Serve `dist/` with an SPA fallback to `index.html` for React Router. A Netlify example is provided in `public/_redirects`; Nginx can use `try_files $uri $uri/ /index.html;`. The existing `.openai/hosting.json` identifies the private Sites demonstration deployment.
-
-See the [deployment guide](docs/DEPLOYMENT.md), [source audit](docs/SOURCES.md), and [commercial proposal](docs/COMMERCIAL_PROPOSAL.md).
-
-Before commercial launch, verify the outstanding business information in the source audit. Logo and photo authorization has already been confirmed. Future improvements include higher-resolution food photographs, live availability, and catalog administration. Google Fonts currently load externally with local font fallbacks; self-hosting requires the appropriate font licenses.
-
-## Configuration
-
-Business details, copy, assets, routes, cordel booklets, theme, and cart limits are centralized under `src/config/`. See the [configuration guide](docs/CONFIGURATION.md) for editable fields, placeholders, validation, and publishing instructions.
-
-## GitHub Pages
-
-The website is published at https://gustavobenabraham.github.io/cuscuzeria-gourmet-site/. Application source remains private; a separate public repository stores only the built site. Use `npm run build:pages` and `npm run test:pages` to validate the Pages build. See [deployment instructions](docs/DEPLOYMENT.md) before publishing.
+A marca, o logotipo e os materiais do restaurante pertencem aos seus respectivos titulares. A disponibilização pública deste repositório apresenta o trabalho realizado e não concede, por si só, uma licença de reutilização desses materiais.

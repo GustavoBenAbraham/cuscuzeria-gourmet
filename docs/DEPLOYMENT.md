@@ -3,10 +3,10 @@
 ## GitHub Pages (primary hosting)
 
 - Public website: https://gustavobenabraham.github.io/cuscuzeria-gourmet-site/
-- Private application source: https://github.com/GustavoBenAbraham/cuscuzeria-gourmet
+- Public application source: https://github.com/GustavoBenAbraham/cuscuzeria-gourmet
 - Public deployment files: https://github.com/GustavoBenAbraham/cuscuzeria-gourmet-site
 
-The source repository stays private. The separate public repository contains the compiled website and its public assets; repository documentation and source history are not copied. GitHub Pages publishes its main branch from the repository root.
+The source repository is public and includes the project documentation and screenshots. The separate public repository contains the compiled website and its public assets; repository documentation and source history are not copied. GitHub Pages publishes its main branch from the repository root.
 
 ### Publish an update
 
@@ -21,7 +21,7 @@ node scripts/publish-pages.mjs
 
 Alternatively, `npm run publish:pages` builds and uploads the site. GitHub then runs its Pages deployment. This command publishes externally; local adjustments need only `npm run dev` or the normal build/preview commands.
 
-The deployment helper maintains a separate checkout in the ignored `.openai/pages-publish/` directory, checks the destination remote, and copies only `dist-pages/`. Commit and push application changes separately to the private source repository.
+The deployment helper maintains a separate checkout in the ignored `.openai/pages-publish/` directory, checks the destination remote, and copies only `dist-pages/`. Commit and push application changes separately to the public source repository.
 
 ### Local previews
 
@@ -41,7 +41,7 @@ The prior Sites deployment is retained as a separate demonstration. This migrati
 
 ## Current repository
 
-The project is hosted in the private GitHub repository [GustavoBenAbraham/cuscuzeria-gourmet](https://github.com/GustavoBenAbraham/cuscuzeria-gourmet), on the `main` branch. The existing private Sites deployment is configured in `.openai/hosting.json`.
+The project is hosted in the public GitHub repository [GustavoBenAbraham/cuscuzeria-gourmet](https://github.com/GustavoBenAbraham/cuscuzeria-gourmet), on the `main` branch. The existing private Sites deployment is configured in `.openai/hosting.json`.
 
 ## Validate locally
 

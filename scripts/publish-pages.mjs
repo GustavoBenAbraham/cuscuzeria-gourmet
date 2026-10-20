@@ -26,7 +26,7 @@ for(const entry of git(['ls-files','-z']).split('\0').filter(Boolean)) {
  if(fs.existsSync(target)) fs.unlinkSync(target);
 }
 fs.cpSync(output,checkout,{recursive:true});
-fs.writeFileSync(path.join(checkout,'README.md'),'# Cuscuzeria Gourmet\n\nPublished website files. The application source is maintained in a separate private repository.\n');
+fs.writeFileSync(path.join(checkout,'README.md'),'# Cuscuzeria Gourmet\n\nPublished website files. Source code and project documentation: https://github.com/GustavoBenAbraham/cuscuzeria-gourmet\n');
 git(['add','--all']);
 if(git(['status','--porcelain'])) {
  git(['-c','user.name=GustavoBenAbraham','-c','user.email=GustavoBenAbraham@users.noreply.github.com','commit','-m','deploy: update restaurant website']);
