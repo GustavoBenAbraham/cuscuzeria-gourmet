@@ -1,3 +1,5 @@
+**Português** | [English](README.en.md)
+
 # Cuscuzeria Gourmet 🌽
 
 **Projeto de trabalho: site institucional e cardápio digital para um restaurante de culinária nordestina.**
